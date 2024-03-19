@@ -1,20 +1,47 @@
+using System;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class WeaponComponent : MonoBehaviour
+    public interface IWeaponComponent
     {
-        public Vector2 Position
+        Vector2 Position { get; }
+        void Fire(Vector2 target);
+    }
+
+    public sealed class WeaponComponent : MonoBehaviour, IWeaponComponent
+    {
+        [SerializeField] private BulletConfig _bulletConfig;
+        [SerializeField] private Transform _firePoint;
+
+        //TODO injection
+        private IBulletSystem _bulletSystem;
+
+        public bool IsPlayer { get; set; }
+
+        public Vector2 Position => _firePoint.position;
+        public Quaternion Rotation => _firePoint.rotation;
+
+        public Func<bool> CanFireDelegate;
+
+        public void Initialize(IBulletSystem bulletSystem)
         {
-            get { return this.firePoint.position; }
+            _bulletSystem = bulletSystem;
         }
 
-        public Quaternion Rotation
+        public void Fire(Vector2 target)
         {
-            get { return this.firePoint.rotation; }
-        }
+            if (!CanFireDelegate())
+                return;
 
-        [SerializeField]
-        private Transform firePoint;
+            var args = IBulletSystem.Args.Create(
+                bulletConfig: _bulletConfig,
+                position: Position,
+                direction: (target - Position).normalized,
+                isPlayer: IsPlayer
+            );
+
+            _bulletSystem.FireBullet(args);
+        }
     }
 }

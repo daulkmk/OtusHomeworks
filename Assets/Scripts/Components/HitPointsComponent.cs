@@ -3,22 +3,42 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class HitPointsComponent : MonoBehaviour
+    public interface IHitPoints
     {
-        public event Action<GameObject> hpEmpty;
-        
-        [SerializeField] private int hitPoints;
-        
-        public bool IsHitPointsExists() {
-            return this.hitPoints > 0;
-        }
+        event Action OnEmptyHP;
 
-        public void TakeDamage(int damage)
+        bool IsHitPointsExists { get; }
+
+        void Restore();
+        void AddValue(int value);
+    }
+
+    public sealed class HitPointsComponent : MonoBehaviour, IHitPoints
+    {
+        [SerializeField] private int _maxHitPoints = 10;
+        private int _hitPoints;
+
+        public event Action OnEmptyHP;
+
+        public bool IsHitPointsExists => _hitPoints > 0;
+
+        public void Restore() => _hitPoints = _maxHitPoints;
+
+        public void AddValue(int value)
         {
-            this.hitPoints -= damage;
-            if (this.hitPoints <= 0)
+            if (_hitPoints <= 0)
+                return;
+
+            _hitPoints += value;
+
+            if (_hitPoints > _maxHitPoints)
             {
-                this.hpEmpty?.Invoke(this.gameObject);
+                _hitPoints = _maxHitPoints;
+            }
+            else if (_hitPoints <= 0)
+            {
+                _hitPoints = 0;
+                OnEmptyHP?.Invoke();
             }
         }
     }

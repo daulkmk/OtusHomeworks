@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7936085547460007407}
   - component: {fileID: 5568771391735819375}
   - component: {fileID: 659620479434099170}
-  - component: {fileID: 5568771391735819379}
+  - component: {fileID: 4319404671794006774}
   - component: {fileID: 5568771391735819372}
   - component: {fileID: 5568771391735819373}
   - component: {fileID: 5568771391735819374}
@@ -130,7 +130,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5568771391735819379
+--- !u!114 &4319404671794006774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,10 +139,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52112fd3e5414bf991b1d54804cb28f5, type: 3}
+  m_Script: {fileID: 11500000, guid: f5ef90b74f4fb49929e97d052efd918e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 0
+  _hitPoints: {fileID: 5568771391735819373}
+  _moveComponent: {fileID: 5568771391735819372}
+  _weapon: {fileID: 5568771391735819374}
+  <IsPlayer>k__BackingField: 0
+  _attackAgent: {fileID: 6896809305229427933}
+  _moveAgent: {fileID: 8186052948131603766}
 --- !u!114 &5568771391735819372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce88fee201654f6e8064002ed15de594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 659620479434099170}
-  speed: 7
+  _speed: 5
+  _rigidbody2D: {fileID: 659620479434099170}
 --- !u!114 &5568771391735819373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5daa1be9cc40a78a2f07cd53e5b47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 3
+  _maxHitPoints: 5
 --- !u!114 &5568771391735819374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce164c84a74a425f8d2e82764aef9e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 3195880656587174614}
+  _bulletSystem: {fileID: 0}
+  _bulletConfig: {fileID: 11400000, guid: c02340420f3214350bfa2208d48581bf, type: 2}
+  _firePoint: {fileID: 3195880656587174614}
 --- !u!114 &8186052948131603766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bdb5771141e4cf18c434a69ec116e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveComponent: {fileID: 5568771391735819372}
+  _destinationReachedDistance: 0.25
 --- !u!114 &6896809305229427933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,8 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba7965842e74a9f89ba3aa66d61da46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponComponent: {fileID: 5568771391735819374}
-  moveAgent: {fileID: 8186052948131603766}
   countdown: 1
 --- !u!1 &2239154907127902911
 GameObject:

@@ -1,29 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class EnemyPositions : MonoBehaviour
     {
-        [SerializeField]
-        private Transform[] spawnPositions;
+        [SerializeField] private Transform[] _spawnPositions;
 
-        [SerializeField]
-        private Transform[] attackPositions;
+        [SerializeField] private Transform[] _attackPositions;
 
-        public Transform RandomSpawnPosition()
+        private readonly List<Transform> _unusedAttackPositions = new List<Transform>();
+        private readonly List<Transform> _unusedSpawnPositions = new List<Transform>();
+
+        public Vector3 RandomSpawnPosition() => RandomPosition(_spawnPositions, _unusedSpawnPositions);
+        public Vector3 RandomAttackPosition() => RandomPosition(_attackPositions, _unusedAttackPositions);
+
+        private Vector3 RandomPosition(Transform[] source, List<Transform> unusedBuffer)
         {
-            return this.RandomTransform(this.spawnPositions);
-        }
+            if (unusedBuffer.Count == 0)
+                unusedBuffer.AddRange(source);
 
-        public Transform RandomAttackPosition()
-        {
-            return this.RandomTransform(this.attackPositions);
-        }
+            var trPosition = unusedBuffer.GetRandomItem();
+            unusedBuffer.Remove(trPosition);
 
-        private Transform RandomTransform(Transform[] transforms)
-        {
-            var index = Random.Range(0, transforms.Length);
-            return transforms[index];
+            return trPosition.position;
         }
     }
 }
