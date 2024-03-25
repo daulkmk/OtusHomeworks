@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour
+    public sealed class Bullet : MonoBehaviour, IPauseGameListener
     {
         [NonSerialized] public bool isPlayer;
         [NonSerialized] public int damage;
@@ -36,6 +36,11 @@ namespace ShootEmUp
         public void SetColor(Color color)
         {
             _spriteRenderer.color = color;
+        }
+
+        void IPauseGameListener.OnGamePaused(bool paused)
+        {
+            _rigidbody2D.simulated = !paused;
         }
     }
 }

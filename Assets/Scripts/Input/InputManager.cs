@@ -7,6 +7,7 @@ namespace ShootEmUp
     {
         float HorizontalDirection { get; }
         event Action OnFireRequired;
+        event Action OnEscape;
     }
 
     public sealed class InputManager : MonoBehaviour, IInputManager
@@ -14,11 +15,15 @@ namespace ShootEmUp
         public float HorizontalDirection { get; private set; }
 
         public event Action OnFireRequired;
+        public event Action OnEscape;
 
-        private void Update()
+        void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 OnFireRequired?.Invoke();
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                OnEscape?.Invoke();
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {

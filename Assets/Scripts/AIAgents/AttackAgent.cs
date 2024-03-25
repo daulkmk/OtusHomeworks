@@ -9,7 +9,7 @@ namespace ShootEmUp
         void Reset();
     }
 
-    public sealed class AttackAgent : MonoBehaviour, IAttackAgent
+    public sealed class AttackAgent : MonoBehaviour, IAttackAgent, IUpdatable
     {
         [SerializeField] private float countdown;
 
@@ -35,12 +35,12 @@ namespace ShootEmUp
             _currentTime = countdown;
         }
 
-        private void Update()
+        void IUpdatable.OnUpdate(float deltaTime)
         {
-            if (!CanAttackDelegate())
+            if (!isActiveAndEnabled || !CanAttackDelegate())
                 return;
             
-            _currentTime -= Time.deltaTime;
+            _currentTime -= deltaTime;
             if (_currentTime <= 0)
             {
                 Fire();

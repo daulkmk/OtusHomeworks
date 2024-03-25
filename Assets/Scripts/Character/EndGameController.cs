@@ -16,7 +16,7 @@ namespace ShootEmUp
 
         private void OnCharacterDeath(Character _)
         {
-            _gameManager.FinishGame();
+            _gameManager.State = GameState.Finished;
         }
     }
 }

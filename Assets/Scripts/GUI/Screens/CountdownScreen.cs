@@ -31,6 +31,8 @@ namespace ShootEmUp.UI
                 SetCount(time);
                 yield return yield;
             }
+
+            Debug.Log("Countdown complete");
             onCountComplete?.Invoke();
         }
 

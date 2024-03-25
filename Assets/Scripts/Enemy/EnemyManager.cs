@@ -4,26 +4,43 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager : MonoBehaviour, IStartGameListener, IPauseGameListener
     {
         [SerializeField] private float timeBetweenSpawns = 1;
 
         [SerializeField] private EnemySpawner _enemySpawner;
-        [SerializeField] private BulletSystem _bulletSystem;
 
         [SerializeField] private EnemyPositions _enemyPositions;
         [SerializeField] private Transform _attackTarget;
 
-        private void Awake()
+        private Coroutine _spawnLoopCoroutine = null;
+        private bool _pauseSpawn = true;
+
+        void IStartGameListener.OnGameStarting()
         {
-            _enemySpawner.Initialize(e => e.Initialize(_bulletSystem));
+            _enemySpawner.Initialize();
+
+            if (_spawnLoopCoroutine != null)
+                StopCoroutine(_spawnLoopCoroutine);
+
+            _spawnLoopCoroutine = StartCoroutine(SpawnLoop());
         }
 
-        private IEnumerator Start()
+        void IPauseGameListener.OnGamePaused(bool paused)
         {
+            _pauseSpawn = paused;
+        }
+
+        private IEnumerator SpawnLoop()
+        {
+            Debug.Log("[ENEMIES] start spawn");
+
             while (true)
             {
                 yield return new WaitForSeconds(timeBetweenSpawns);
+
+                while (_pauseSpawn)
+                    yield return null;
 
                 var enemy = _enemySpawner.Spawn();
                 if (enemy == null)

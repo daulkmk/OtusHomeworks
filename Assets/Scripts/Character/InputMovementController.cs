@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class InputMovementController : MonoBehaviour
+    public sealed class InputMovementController : MonoBehaviour, IFixedUpdatable
     {
         private IInputManager _inputManager;
         private IMoveComponent _moveComponent;
@@ -13,7 +13,7 @@ namespace ShootEmUp
             _moveComponent = moveComponent;
         }
 
-        private void FixedUpdate()
+        void IFixedUpdatable.OnFixedUpdate(float deltaTime)
         {
             var direction = new Vector2(_inputManager.HorizontalDirection, 0);
             _moveComponent.FixedMove(direction);

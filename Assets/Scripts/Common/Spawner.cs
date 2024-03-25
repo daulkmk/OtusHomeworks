@@ -34,10 +34,14 @@ namespace ShootEmUp
         {
             var obj = Instantiate(_prefab, _unspawnedContainer);
 
+            OnObjectSpawned(obj);
+
             _initializeObjectDelegate?.Invoke(obj);
 
             return obj;
         }
+
+        protected virtual void OnObjectSpawned(T obj) { }
 
         public T Spawn()
         {

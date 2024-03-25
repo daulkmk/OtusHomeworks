@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour, IUpdatable
     {
         [SerializeField] private float _startPositionY;
         [SerializeField] private float _endPositionY;
@@ -19,7 +19,7 @@ namespace ShootEmUp
             _positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        void IUpdatable.OnUpdate(float deltaTime)
         {
             if (transform.position.y <= _endPositionY)
             {
@@ -32,7 +32,7 @@ namespace ShootEmUp
 
             transform.position -= new Vector3(
                 _positionX,
-                _movingSpeedY * Time.fixedDeltaTime,
+                _movingSpeedY * deltaTime,
                 _positionZ
             );
         }
