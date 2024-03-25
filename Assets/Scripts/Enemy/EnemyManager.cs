@@ -6,8 +6,6 @@ namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour
     {
-        [SerializeField] private float timeBetweenSpawns = 1;
-
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private BulletSystem _bulletSystem;
 
@@ -19,26 +17,21 @@ namespace ShootEmUp
             _enemySpawner.Initialize(e => e.Initialize(_bulletSystem));
         }
 
-        private IEnumerator Start()
+        public void TryToSpawnEnemy()
         {
-            while (true)
-            {
-                yield return new WaitForSeconds(timeBetweenSpawns);
+            var enemy = _enemySpawner.Spawn();
+            if (enemy == null)
+                return;
 
-                var enemy = _enemySpawner.Spawn();
-                if (enemy == null)
-                    continue;
+            var spawnPosition = _enemyPositions.RandomSpawnPosition();
+            enemy.transform.position = spawnPosition;
 
-                var spawnPosition = _enemyPositions.RandomSpawnPosition();
-                enemy.transform.position = spawnPosition;
+            var attackPosition = _enemyPositions.RandomAttackPosition();
 
-                var attackPosition = _enemyPositions.RandomAttackPosition();
+            enemy.SetTargets(attackPosition, _attackTarget);
+            enemy.Reset();
 
-                enemy.SetTargets(attackPosition, _attackTarget);
-                enemy.Reset();
-
-                enemy.OnDeath += OnDestroyed;
-            }
+            enemy.OnDeath += OnDestroyed;
         }
 
         private void OnDestroyed(Character enemy)

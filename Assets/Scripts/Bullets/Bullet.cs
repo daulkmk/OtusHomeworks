@@ -11,11 +11,12 @@ namespace ShootEmUp
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        public event Action<Bullet, Collision2D> OnCollisionEntered;
+        public event Action<Bullet> OnDeath;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            OnCollisionEntered?.Invoke(this, collision);
+            DealDamage(collision.gameObject);
+            OnDeath?.Invoke(this);
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -36,6 +37,12 @@ namespace ShootEmUp
         public void SetColor(Color color)
         {
             _spriteRenderer.color = color;
+        }
+
+        private void DealDamage(GameObject gameObject)
+        {
+            if (gameObject.TryGetComponent<IDamagable>(out var damagable))
+                damagable.ApplyDamage(damage, isPlayer);
         }
     }
 }
