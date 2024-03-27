@@ -18,6 +18,8 @@ namespace ShootEmUp
         [field: SerializeField]
         public bool ExceedCount { get; set; }
 
+        public bool Initialized { get; private set; }
+
         public void Initialize(Action<T> initializeObjectDelegate = null)
         {
             _initializeObjectDelegate = initializeObjectDelegate;
@@ -28,6 +30,8 @@ namespace ShootEmUp
                 var obj = SpawnInitialized();
                 _pool.Enqueue(obj);
             }
+
+            Initialized = true;
         }
 
         private T SpawnInitialized()

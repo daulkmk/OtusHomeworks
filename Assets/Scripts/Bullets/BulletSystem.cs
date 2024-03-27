@@ -57,21 +57,15 @@ namespace ShootEmUp
             bullet.isPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
 
-            bullet.OnCollisionEntered += OnBulletCollision;
+            bullet.OnDeath += OnBulletDeath;
 
             _activeBullets.Add(bullet);
         }
-        
-        private void OnBulletCollision(Bullet bullet, Collision2D collision)
-        {
-            DealDamage(bullet, collision.gameObject);
-            RemoveBullet(bullet);
-        }
 
-        private void DealDamage(Bullet bullet, GameObject gameObject)
+        private void OnBulletDeath(Bullet bullet)
         {
-            if (gameObject.TryGetComponent<IDamagable>(out var damagable))
-                damagable.ApplyDamage(bullet.damage, bullet.isPlayer);
+            bullet.OnDeath -= OnBulletDeath;
+            RemoveBullet(bullet);
         }
 
         private void FixedUpdate()
@@ -87,11 +81,7 @@ namespace ShootEmUp
         private void RemoveBullet(Bullet bullet)
         {
             if (_activeBullets.Remove(bullet))
-            {
-                bullet.OnCollisionEntered -= OnBulletCollision;
-
                 _bulletSpawner.Despawn(bullet);
-            }
         }
     }
 }
