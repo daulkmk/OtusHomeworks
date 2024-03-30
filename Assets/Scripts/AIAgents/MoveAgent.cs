@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -13,17 +14,12 @@ namespace ShootEmUp
     {
         [SerializeField] private float _destinationReachedDistance = 0.25f;
 
-        private IMoveComponent _moveComponent;
+        [Inject] private IMoveComponent _moveComponent;
 
         private Vector2 _destination;
         private bool _isReached;
 
         public bool IsReached => _isReached;
-
-        public void Initialize(IMoveComponent move)
-        {
-            _moveComponent = move;
-        }
 
         public void SetDestination(Vector2 endPoint)
         {

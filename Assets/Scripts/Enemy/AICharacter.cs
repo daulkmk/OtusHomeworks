@@ -16,9 +16,6 @@ namespace ShootEmUp
         {
             base.Awake();
 
-            _attackAgent.Initialize(_weapon);
-            _moveAgent.Initialize(_moveComponent);
-
             _attackAgent.CanAttackDelegate = CanAttackAgentAttack;
         }
 

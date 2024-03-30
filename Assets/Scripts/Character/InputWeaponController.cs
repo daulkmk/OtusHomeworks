@@ -1,17 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
     public sealed class InputWeaponController : MonoBehaviour, IPauseGameListener
     {
-        [SerializeField] private IWeaponComponent _weapon;
-        [SerializeField] private IInputManager _inputManager;
-
-        public void Initialize(IInputManager inputManager, IWeaponComponent weaponComponent)
-        {
-            _weapon = weaponComponent;
-            _inputManager = inputManager;
-        }
+        [Inject] private IWeaponComponent _weapon;
+        [Inject] private IInputManager _inputManager;
 
         private void OnFireRequired()
         {

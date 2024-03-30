@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public interface IEnemyManager
     {
-        [SerializeField] private EnemySpawner _enemySpawner;
+        void TryToSpawnEnemy(Transform attackTarget);
+    }
 
-        [SerializeField] private EnemyPositions _enemyPositions;
-        [SerializeField] private Transform _attackTarget;
+    public sealed class EnemyManager : IEnemyManager
+    {
+        private ISpawner<AICharacter> _enemySpawner;
+        private IEnemyPositions _enemyPositions;
 
-        public void TryToSpawnEnemy()
+        public EnemyManager(ISpawner<AICharacter> spawner, IEnemyPositions positions)
+        {
+            _enemySpawner = spawner;
+            _enemyPositions = positions;
+        }
+
+        public void TryToSpawnEnemy(Transform attackTarget)
         {
             if (!_enemySpawner.Initialized)
                 _enemySpawner.Initialize();
@@ -25,7 +35,7 @@ namespace ShootEmUp
 
             var attackPosition = _enemyPositions.RandomAttackPosition();
 
-            enemy.SetTargets(attackPosition, _attackTarget);
+            enemy.SetTargets(attackPosition, attackTarget);
             enemy.Reset();
 
             enemy.OnDeath += OnDestroyed;

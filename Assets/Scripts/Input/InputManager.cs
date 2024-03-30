@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -10,14 +11,14 @@ namespace ShootEmUp
         event Action OnEscape;
     }
 
-    public sealed class InputManager : MonoBehaviour, IInputManager
+    public sealed class InputManager : IInputManager, ITickable
     {
         public float HorizontalDirection { get; private set; }
 
         public event Action OnFireRequired;
         public event Action OnEscape;
 
-        void Update()
+        void ITickable.Tick()
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 OnFireRequired?.Invoke();

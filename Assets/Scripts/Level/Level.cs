@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
     public class Level : MonoBehaviour, IStartGameListener, IPauseGameListener
     {
         [SerializeField] private float timeBetweenSpawns = 1;
-        [SerializeField] private EnemyManager _enemyManager;
+
+        [Inject] private Character _character;
+        [Inject] private IEnemyManager _enemyManager;
 
         private Coroutine _spawnLoopCoroutine = null;
         private bool _pauseSpawn = true;
@@ -21,7 +24,7 @@ namespace ShootEmUp
                 while (_pauseSpawn)
                     yield return null;
 
-                _enemyManager.TryToSpawnEnemy();
+                _enemyManager.TryToSpawnEnemy(_character.transform);
             }
         }
 

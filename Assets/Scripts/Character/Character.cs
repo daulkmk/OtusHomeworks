@@ -18,12 +18,6 @@ namespace ShootEmUp
 
         public event Action<Character> OnDeath;
 
-        //TODO direct injection into weapon
-        public void Initialize(IBulletSystem bulletSystem)
-        {
-            _weapon.Initialize(bulletSystem);
-        }
-
         protected virtual void Awake()
         {
             _weapon.IsPlayer = IsPlayer;

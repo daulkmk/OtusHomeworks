@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zenject;
 
 namespace ShootEmUp
 {
     public class StartGameTrigger : MonoBehaviour
     {
-        [SerializeField] private UI.GameGUI _gameGUI;
-        [SerializeField] private GameManager _gameManager;
+        [Inject] private UI.IGameGUI _gameGUI;
+        [Inject] private IGameManager _gameManager;
 
         private void Start()
         {

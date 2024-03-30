@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
     public class PauseGameTrigger : MonoBehaviour
     {
-        [SerializeField] private UI.GameGUI _gameGUI;
-        [SerializeField] private InputManager _inputManager;
-        [SerializeField] private GameManager _gameManager;
+        [Inject] private UI.IGameGUI _gameGUI;
+        [Inject] private IInputManager _inputManager;
+        [Inject] private IGameManager _gameManager;
 
         private void Awake()
         {

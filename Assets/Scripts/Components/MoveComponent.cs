@@ -20,7 +20,7 @@ namespace ShootEmUp
 
         public void FixedMove(Vector2 direction)
         {
-            if (CanMove == true)
+            if (CanMove)
             {
                 var nextPosition = _rigidbody2D.position + _speed * Time.fixedDeltaTime * direction.normalized;
                 _rigidbody2D.MovePosition(nextPosition);

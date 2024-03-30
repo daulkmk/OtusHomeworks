@@ -1,16 +1,29 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zenject;
+    
 namespace ShootEmUp
 {
-    public class Spawner<T> : MonoBehaviour where T : Component
+    public interface ISpawner<T>
+    {
+        bool Initialized { get; }
+
+        void Initialize(Action<T> initializeObjectDelegate = null);
+
+        T Spawn();
+        void Despawn(T obj);
+    }
+
+    public class Spawner<T> : MonoBehaviour, ISpawner<T> where T : Component
     {
         [SerializeField] private int _count = 5;
         [SerializeField] private T _prefab;
 
         [SerializeField] private Transform _spawnedContainer;
         [SerializeField] private Transform _unspawnedContainer;
+
+        [Inject] private IInstantiator _instantiator;
 
         private readonly Queue<T> _pool = new();
         private Action<T> _initializeObjectDelegate = null;
@@ -34,19 +47,6 @@ namespace ShootEmUp
             Initialized = true;
         }
 
-        private T SpawnInitialized()
-        {
-            var obj = Instantiate(_prefab, _unspawnedContainer);
-
-            OnObjectSpawned(obj);
-
-            _initializeObjectDelegate?.Invoke(obj);
-
-            return obj;
-        }
-
-        protected virtual void OnObjectSpawned(T obj) { }
-
         public T Spawn()
         {
             if (!_pool.TryDequeue(out var obj))
@@ -56,15 +56,28 @@ namespace ShootEmUp
                 else
                     return null;
             }
-            
-            obj.transform.SetParent(_spawnedContainer);            
+
+            obj.transform.SetParent(_spawnedContainer);
             return obj;
         }
 
-        public void Despawn(T enemy)
+        public void Despawn(T obj)
         {
-            enemy.transform.SetParent(_unspawnedContainer);
-            _pool.Enqueue(enemy);
+            obj.transform.SetParent(_unspawnedContainer);
+            _pool.Enqueue(obj);
         }
+
+        private T SpawnInitialized()
+        {
+            var obj = _instantiator.Instantiate(_prefab, _unspawnedContainer);
+
+            OnObjectSpawned(obj);
+
+            _initializeObjectDelegate?.Invoke(obj);
+
+            return obj;
+        }
+
+        protected virtual void OnObjectSpawned(T obj) { }
     }
 }

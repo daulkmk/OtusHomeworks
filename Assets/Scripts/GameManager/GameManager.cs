@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -13,33 +14,8 @@ namespace ShootEmUp
         void AddUpdateListener(IUpdatable updatable);
     }
 
-    public interface IPauseGameListener
-    {
-        void OnGamePaused(bool paused);
-    }
-
-    public interface IFinishGameListener
-    {
-        void OnGameFinished();
-    }
-
-    public interface IStartGameListener
-    {
-        void OnGameStarting();
-    }
-
-    public interface IUpdatable
-    {
-        void OnUpdate(float deltaTime);
-    }
-
-    public interface IFixedUpdatable
-    {
-        void OnFixedUpdate(float deltaTime);
-    }
-
     //TODO RemoveAllListeners, RemoveUpdateListener, ILateUpdateListener, IFixedUpdateListener, IGameStateListener
-    public sealed class GameManager : MonoBehaviour, IGameManager
+    public sealed class GameManager : IGameManager, IInitializable, ITickable, IFixedTickable
     {
         private List<IPauseGameListener> _gamePauseListeners = new();
         private List<IFinishGameListener> _gameFinishListeners = new();
@@ -78,14 +54,15 @@ namespace ShootEmUp
             }
         }
 
-        private void Awake()
+        void IInitializable.Initialize()
         {
             FindSceneAllListeners();
         }
 
         void FindSceneAllListeners()
         {
-            foreach (var go in gameObject.scene.GetRootGameObjects())
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            foreach (var go in scene.GetRootGameObjects())
                 AddAllListeners(go);
         }
 
@@ -164,7 +141,7 @@ namespace ShootEmUp
                 _gamePauseListeners[i].OnGamePaused(false);
         }
 
-        private void Update()
+        void ITickable.Tick()
         {
             if (_state != GameState.Playng)
                 return;
@@ -175,7 +152,7 @@ namespace ShootEmUp
                 _updateListeners[i].OnUpdate(dt);
         }
 
-        private void FixedUpdate()
+        void IFixedTickable.FixedTick()
         {
             if (_state != GameState.Playng)
                 return;

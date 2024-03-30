@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -34,14 +34,20 @@ namespace ShootEmUp
         }
     }
 
-    public sealed class BulletSystem : MonoBehaviour, IBulletSystem
+    public sealed class BulletSystem : IBulletSystem, IInitializable, IFixedTickable
     {
-        [SerializeField] private BulletSpawner _bulletSpawner;
-        [SerializeField] private LevelBounds _levelBounds;
+        private ISpawner<Bullet> _bulletSpawner;
+        private IBounds _bounds;
 
         private readonly List<Bullet> _activeBullets = new();
-        
-        private void Awake()
+
+        public BulletSystem(ISpawner<Bullet> spawner, IBounds bounds)
+        {
+            _bulletSpawner = spawner;
+            _bounds = bounds;
+        }
+
+        void IInitializable.Initialize()
         {
             _bulletSpawner.Initialize();
         }
@@ -68,12 +74,12 @@ namespace ShootEmUp
             RemoveBullet(bullet);
         }
 
-        private void FixedUpdate()
+        void IFixedTickable.FixedTick()
         {
             for (int i = _activeBullets.Count - 1; i >= 0; i--)
             {
                 var bullet = _activeBullets[i];
-                if (!_levelBounds.InBounds(bullet.transform.position))
+                if (!_bounds.InBounds(bullet.transform.position))
                     RemoveBullet(bullet);
             }
         }

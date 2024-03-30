@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -13,17 +14,12 @@ namespace ShootEmUp
     {
         [SerializeField] private float countdown;
 
-        private IWeaponComponent _weapon;
+        [Inject] private IWeaponComponent _weapon;
 
         private Transform _target;
         private float _currentTime;
 
         public Func<bool> CanAttackDelegate;
-
-        public void Initialize(IWeaponComponent weapon)
-        {
-            _weapon = weapon;
-        }
 
         public void SetTarget(Transform target)
         {

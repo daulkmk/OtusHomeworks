@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
@@ -14,8 +15,7 @@ namespace ShootEmUp
         [SerializeField] private BulletConfig _bulletConfig;
         [SerializeField] private Transform _firePoint;
 
-        //TODO injection
-        private IBulletSystem _bulletSystem;
+        [Inject] private IBulletSystem _bulletSystem;
 
         public bool IsPlayer { get; set; }
 
@@ -23,11 +23,6 @@ namespace ShootEmUp
         public Quaternion Rotation => _firePoint.rotation;
 
         public Func<bool> CanFireDelegate;
-
-        public void Initialize(IBulletSystem bulletSystem)
-        {
-            _bulletSystem = bulletSystem;
-        }
 
         public void Fire(Vector2 target)
         {
