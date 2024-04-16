@@ -16,7 +16,7 @@ namespace ShootEmUp
         void IFixedUpdatable.OnFixedUpdate(float deltaTime)
         {
             var direction = new Vector2(_inputManager.HorizontalDirection, 0);
-            _moveComponent.FixedMove(direction);
+            _moveComponent.FixedMove(direction, deltaTime);
         }
     }
 }

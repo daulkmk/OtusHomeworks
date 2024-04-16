@@ -9,7 +9,7 @@ namespace ShootEmUp
         void SetDestination(Vector2 endPoint);
     }
 
-    public sealed class MoveAgent : MonoBehaviour, IMoveAgent
+    public sealed class MoveAgent : MonoBehaviour, IMoveAgent, IFixedUpdatable
     {
         [SerializeField] private float _destinationReachedDistance = 0.25f;
 
@@ -31,9 +31,9 @@ namespace ShootEmUp
             _isReached = false;
         }
 
-        private void FixedUpdate()
+        void IFixedUpdatable.OnFixedUpdate(float deltaTime)
         {
-            if (_isReached || !_moveComponent.CanMove)
+            if (!isActiveAndEnabled || _isReached || !_moveComponent.CanMove)
                 return;
             
             var vector = _destination - (Vector2)transform.position;
@@ -44,7 +44,7 @@ namespace ShootEmUp
             }
 
             var direction = vector.normalized;
-            _moveComponent.FixedMove(direction);
+            _moveComponent.FixedMove(direction, deltaTime);
         }
     }
 }

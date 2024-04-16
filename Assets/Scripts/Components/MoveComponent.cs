@@ -6,7 +6,7 @@ namespace ShootEmUp
     public interface IMoveComponent
     {
         bool CanMove { get; }
-        void FixedMove(Vector2 direction);
+        void FixedMove(Vector2 direction, float deltaTime);
     }
 
     public sealed class MoveComponent : MonoBehaviour, IMoveComponent
@@ -18,11 +18,11 @@ namespace ShootEmUp
 
         public bool CanMove => CanMoveDelegate();
 
-        public void FixedMove(Vector2 direction)
+        public void FixedMove(Vector2 direction, float deltaTime)
         {
             if (CanMove == true)
             {
-                var nextPosition = _rigidbody2D.position + _speed * Time.fixedDeltaTime * direction.normalized;
+                var nextPosition = _rigidbody2D.position + _speed * deltaTime * direction.normalized;
                 _rigidbody2D.MovePosition(nextPosition);
             }
         }

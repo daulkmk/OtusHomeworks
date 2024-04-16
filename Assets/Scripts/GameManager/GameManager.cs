@@ -5,48 +5,14 @@ namespace ShootEmUp
 {
     public enum GameState { None, Playng, Paused, Finished }
 
-    public interface IGameManager
+    public sealed class GameManager : MonoBehaviour
     {
-        GameState State { get; set; }
+        private readonly List<IPauseGameListener> _gamePauseListeners = new();
+        private readonly List<IFinishGameListener> _gameFinishListeners = new();
+        private readonly List<IStartGameListener> _gameStartListeners = new();
 
-        void AddAllListeners(GameObject go);
-        void AddUpdateListener(IUpdatable updatable);
-    }
-
-    public interface IPauseGameListener
-    {
-        void OnGamePaused(bool paused);
-    }
-
-    public interface IFinishGameListener
-    {
-        void OnGameFinished();
-    }
-
-    public interface IStartGameListener
-    {
-        void OnGameStarting();
-    }
-
-    public interface IUpdatable
-    {
-        void OnUpdate(float deltaTime);
-    }
-
-    public interface IFixedUpdatable
-    {
-        void OnFixedUpdate(float deltaTime);
-    }
-
-    //TODO RemoveAllListeners, RemoveUpdateListener, ILateUpdateListener, IFixedUpdateListener, IGameStateListener
-    public sealed class GameManager : MonoBehaviour, IGameManager
-    {
-        private List<IPauseGameListener> _gamePauseListeners = new();
-        private List<IFinishGameListener> _gameFinishListeners = new();
-        private List<IStartGameListener> _gameStartListeners = new();
-
-        private List<IUpdatable> _updateListeners = new();
-        private List<IFixedUpdatable> _fixedUpdateListeners = new();
+        private readonly List<IUpdatable> _updateListeners = new();
+        private readonly List<IFixedUpdatable> _fixedUpdateListeners = new();
 
         private GameState _state = GameState.None;
         public GameState State
@@ -54,27 +20,8 @@ namespace ShootEmUp
             get => _state;
             set
             {
-                if (_state == value)
-                    return;
-
-                Debug.Log("[GAME] state = " + value.ToString());
-
-                switch (value)
-                {
-                    case GameState.Playng:
-                        if (_state == GameState.None)
-                            StartGame();
-                        else
-                            ResumeGame();
-                        break;
-                    case GameState.Paused:
-                        PauseGame();
-                        break;
-                    case GameState.Finished:
-                        FinishGame();
-                        break;
-                    default: throw new System.NotImplementedException();
-                }
+                if (_state != value)
+                    SetState(value);
             }
         }
 
@@ -107,10 +54,32 @@ namespace ShootEmUp
             }
         }
 
-        void IGameManager.AddUpdateListener(IUpdatable updatable)
+        public void AddUpdateListener(IUpdatable updatable)
         {
             if (!_updateListeners.Contains(updatable))
                 _updateListeners.Add(updatable);
+        }
+
+        private void SetState(GameState state)
+        {
+            Debug.Log("[GAME] state = " + state.ToString());
+
+            switch (state)
+            {
+                case GameState.Playng:
+                    if (_state == GameState.None)
+                        StartGame();
+                    else
+                        ResumeGame();
+                    break;
+                case GameState.Paused:
+                    PauseGame();
+                    break;
+                case GameState.Finished:
+                    FinishGame();
+                    break;
+                default: throw new System.NotImplementedException();
+            }
         }
 
         private void StartGame()
@@ -145,7 +114,6 @@ namespace ShootEmUp
                 ThrowStateException(GameState.Paused);
 
             _state = GameState.Paused;
-            Time.timeScale = 0;
 
             for (int i = 0; i < _gamePauseListeners.Count; i++)
                 _gamePauseListeners[i].OnGamePaused(true);
@@ -158,7 +126,6 @@ namespace ShootEmUp
                 ThrowStateException(GameState.Playng);
 
             _state = GameState.Playng;
-            Time.timeScale = 1;
 
             for (int i = 0; i < _gamePauseListeners.Count; i++)
                 _gamePauseListeners[i].OnGamePaused(false);
