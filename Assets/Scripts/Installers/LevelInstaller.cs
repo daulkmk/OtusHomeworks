@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,14 +7,23 @@ namespace ShootEmUp
     {
         [SerializeField] private LevelBounds _levelBounds;
         [SerializeField] private EnemyPositions _enemyPositions;
-        [SerializeField] private Character _character;
+        [SerializeField] private GameObjectContext _characterContext;
 
         public override void InstallBindings()
         {
-            Container.Bind<Character>().FromInstance(_character).AsSingle();
+            Container.Bind<Character>()
+                .FromSubContainerResolve()
+                .ByInstanceGetter(GetCharacterContainer)
+                .AsSingle();
 
             BindInterfacesAndInject(_levelBounds);
             BindInterfacesAndInject(_enemyPositions);
+        }
+
+        DiContainer GetCharacterContainer(InjectContext c)
+        {
+            _characterContext.Install(Container);
+            return _characterContext.Container;
         }
 
         private void BindInterfacesAndInject<T>(T obj)

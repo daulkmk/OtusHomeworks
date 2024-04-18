@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,18 +5,21 @@ namespace ShootEmUp
 {
     public class CharacterInstaller : MonoInstaller
     {
-        [SerializeField] private Character _character;
+        [SerializeField] private bool _isPlayer = true;
 
         public override void InstallBindings()
         {
-            BindAndInject(_character.WeaponComponent);
-            BindAndInject(_character.MoveComponent);
-        }
+            Container.BindInterfacesTo<TransformInfo>()
+                .AsSingle()
+                .WithArguments(transform);
 
-        private void BindAndInject<T>(T obj)
-        {
-            Container.Bind<T>().FromInstance(obj).AsSingle();
-            Container.QueueForInject(obj);
+            Container.BindInterfacesTo<GameObjectInfo>()
+                .AsSingle()
+                .WithArguments(gameObject);
+
+            Container.BindInterfacesAndSelfTo<Character>()
+                .AsSingle()
+                .WithArguments(_isPlayer);
         }
     }
 }

@@ -3,20 +3,26 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour, IPauseGameListener
+    public sealed class Bullet : IOnCollisionEnter2DHandler, IPauseGameListener
     {
-        [NonSerialized] public bool isPlayer;
-        [NonSerialized] public int damage;
-
-        [SerializeField] private Rigidbody2D _rigidbody2D;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        private readonly Rigidbody2D _rigidbody2D;
+        private readonly SpriteRenderer _spriteRenderer;
+        private readonly IGameObject _gameObject;
 
         public event Action<Bullet> OnDeath;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        public bool IsPlayer { get; set; }
+        public int Damage { get; set; }
+        public Vector3 Position => _gameObject.Transform.Position;
+
+        public Bullet(bool isPlayer, int damage, Rigidbody2D rigidbody2D, SpriteRenderer spriteRenderer, IGameObject gameObject)
         {
-            DealDamage(collision.gameObject);
-            OnDeath?.Invoke(this);
+            _rigidbody2D = rigidbody2D;
+            _spriteRenderer = spriteRenderer;
+            _gameObject = gameObject;
+
+            IsPlayer = isPlayer;
+            Damage = damage;
         }
 
         public void SetVelocity(Vector2 velocity)
@@ -26,12 +32,12 @@ namespace ShootEmUp
 
         public void SetPhysicsLayer(int physicsLayer)
         {
-            gameObject.layer = physicsLayer;
+            _gameObject.Layer = physicsLayer;
         }
 
         public void SetPosition(Vector3 position)
         {
-            transform.position = position;
+            _gameObject.Transform.Position = position;
         }
 
         public void SetColor(Color color)
@@ -39,10 +45,16 @@ namespace ShootEmUp
             _spriteRenderer.color = color;
         }
 
+        void IOnCollisionEnter2DHandler.OnCollisionEnter2D(Collision2D collision)
+        {
+            DealDamage(collision.gameObject);
+            OnDeath?.Invoke(this);
+        }
+
         private void DealDamage(GameObject gameObject)
         {
             if (gameObject.TryGetComponent<IDamagable>(out var damagable))
-                damagable.ApplyDamage(damage, isPlayer);
+                damagable.ApplyDamage(Damage, IsPlayer);
         }
 
         void IPauseGameListener.OnGamePaused(bool paused)

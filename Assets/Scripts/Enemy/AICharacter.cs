@@ -1,39 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using R3;
 
 namespace ShootEmUp
 {
     public class AICharacter : Character
     {
-        [SerializeField] private AttackAgent _attackAgent;
-        [SerializeField] private MoveAgent _moveAgent;
+        public IAttackAgent AttackAgent { get; private set; }
+        public IMoveAgent MoveAgent { get; private set; }
 
-        public IAttackAgent AttackAgent => _attackAgent;
-        public IMoveAgent MoveAgent => _moveAgent;
+        private CompositeDisposable _disposables;
 
-        protected override void Awake()
+        public AICharacter(IAttackAgent attackAgent, IMoveAgent moveAgent, IWeapon weapon, IMove move, IHitPoints hitPoints, IGameObject gameObject)
+            : base(weapon, move, hitPoints, gameObject, false)
         {
-            base.Awake();
-
-            _attackAgent.CanAttackDelegate = CanAttackAgentAttack;
+            AttackAgent = attackAgent;
+            MoveAgent = moveAgent;
         }
 
-        public void SetTargets(Vector2 moveTarget, Transform attackTarget)
+        protected override void Initialize()
         {
-            _moveAgent.SetDestination(moveTarget);
-            _attackAgent.SetTarget(attackTarget);
+            base.Initialize();
+
+            _disposables = new CompositeDisposable(
+                Weapon.CanFire.Subscribe(OnAttackAgentConditionChanged),
+                MoveAgent.IsReached.Subscribe(OnAttackAgentConditionChanged)
+            );
+
+            UpdateAttackAgent();
+        }
+
+        protected override void Dispose()
+        {
+            _disposables.Dispose();
+            base.Dispose();
+        }
+
+        public void SetTargets(Vector2 moveTarget, ITransform attackTarget)
+        {
+            MoveAgent.SetDestination(moveTarget);
+            AttackAgent.SetTarget(attackTarget);
         }
 
         public void Reset()
         {
-            _attackAgent.Reset();
-            _hitPoints.Restore();
+            AttackAgent.Reset();
+            HitPoints.Restore();
+        }
+
+        private void OnAttackAgentConditionChanged(bool _)
+        {
+            UpdateAttackAgent();
         }
 
         private bool CanAttackAgentAttack()
         {
-            return _moveAgent.IsReached && base.CanFireWeapon();
+            return MoveAgent.IsReached.CurrentValue && base.CanFireWeapon();
+        }
+
+        private void UpdateAttackAgent()
+        {
+            AttackAgent.CanAttack.Value = CanAttackAgentAttack();
         }
     }
 }

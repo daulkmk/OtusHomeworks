@@ -1,50 +1,96 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public class Character : MonoBehaviour, IDamagable
+    public class Character : ICharacter, IInitializable, IDisposable, IDamagable
     {
-        [SerializeField] protected HitPointsComponent _hitPoints;
-        [SerializeField] protected MoveComponent _moveComponent;
-        [SerializeField] protected WeaponComponent _weapon;
-
-        [field: SerializeField]
         public bool IsPlayer { get; private set; }
 
-        public IMoveComponent MoveComponent => _moveComponent;
-        public IWeaponComponent WeaponComponent => _weapon;
-        public IHitPoints HitPoints => _hitPoints;
+        public IMove Move { get; private set; }
+        public IWeapon Weapon { get; private set; }
+        public IHitPoints HitPoints { get; private set; }
 
         public event Action<Character> OnDeath;
 
-        protected virtual void Awake()
+        public IGameObject GameObject { get; private set; }
+
+        public Character(IWeapon weapon, IMove move, IHitPoints hitPoints, IGameObject gameObject, bool isPlayer)
         {
-            _weapon.IsPlayer = IsPlayer;
-            _weapon.CanFireDelegate = CanFireWeapon;
+            GameObject = gameObject;
 
-            _moveComponent.CanMoveDelegate = CanMove;
-
-            _hitPoints.Restore();
-            _hitPoints.OnEmptyHP += OnEmptyHP;
+            Move = move;
+            Weapon = weapon;
+            HitPoints = hitPoints;
+            IsPlayer = isPlayer;
         }
 
-        protected virtual bool CanFireWeapon() => gameObject.activeInHierarchy && _hitPoints.IsHitPointsExists;
-        protected virtual bool CanMove() => gameObject.activeInHierarchy && _hitPoints.IsHitPointsExists;
+        void IInitializable.Initialize()
+        {
+            Initialize();
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
+        protected virtual void Initialize()
+        {
+            UpdateComponents();
+
+            HitPoints.Restore();
+            HitPoints.OnEmptyHP += OnEmptyHP;
+            HitPoints.OnRestoreHP += OnRestoreHP;
+
+            GameObject.OnEnable += UpdateComponents;
+            GameObject.OnDisable += UpdateComponents;
+        }
+
+        protected virtual void Dispose()
+        {
+            HitPoints.OnEmptyHP -= OnEmptyHP;
+            HitPoints.OnRestoreHP -= OnRestoreHP;
+
+            GameObject.OnEnable -= UpdateComponents;
+            GameObject.OnDisable -= UpdateComponents;
+        }
+
+        protected virtual bool CanFireWeapon() => GameObject.IsActiveInHierarchy && HitPoints.IsHitPointsExists;
+        protected virtual bool CanMove() => GameObject.IsActiveInHierarchy && HitPoints.IsHitPointsExists;
 
         private void OnEmptyHP()
         {
+            Weapon.CanFire.Value = CanFireWeapon();
+
             OnDeath?.Invoke(this);
+        }
+
+        private void OnRestoreHP()
+        {
+            UpdateComponents();
+        }
+
+        private void UpdateComponents()
+        {
+            Weapon.CanFire.Value = CanFireWeapon();
+            Move.CanMove.Value = CanMove();
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            GameObject.Transform.Position = position;
         }
 
         public void ApplyDamage(int damage, bool isPlayer)
         {
             if (isPlayer == IsPlayer)
                 return;
-            if (!_hitPoints.IsHitPointsExists)
+            if (!HitPoints.IsHitPointsExists)
                 return;
 
-            _hitPoints.AddValue(-damage);
+            HitPoints.AddValue(-damage);
         }
     }
 }

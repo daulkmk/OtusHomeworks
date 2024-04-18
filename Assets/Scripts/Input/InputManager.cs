@@ -4,13 +4,6 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public interface IInputManager
-    {
-        float HorizontalDirection { get; }
-        event Action OnFireRequired;
-        event Action OnEscape;
-    }
-
     public sealed class InputManager : IInputManager, ITickable
     {
         public float HorizontalDirection { get; private set; }

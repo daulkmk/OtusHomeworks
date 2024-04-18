@@ -11,18 +11,22 @@ namespace ShootEmUp
         GameState State { get; set; }
 
         void AddAllListeners(GameObject go);
-        void AddUpdateListener(IUpdatable updatable);
+        void AddAllListeners(object obj);
+        void AddAllListeners(IReadOnlyCollection<IGameManagerListener> listeners);
+
+        void RemoveAllListeners(GameObject go);
+        void RemoveAllListeners(object obj);
+        void RemoveAllListeners(IReadOnlyCollection<IGameManagerListener> listeners);
     }
 
-    //TODO RemoveAllListeners, RemoveUpdateListener, ILateUpdateListener, IFixedUpdateListener, IGameStateListener
     public sealed class GameManager : IGameManager, IInitializable, ITickable, IFixedTickable
     {
-        private List<IPauseGameListener> _gamePauseListeners = new();
-        private List<IFinishGameListener> _gameFinishListeners = new();
-        private List<IStartGameListener> _gameStartListeners = new();
+        private readonly List<IPauseGameListener> _gamePauseListeners = new();
+        private readonly List<IFinishGameListener> _gameFinishListeners = new();
+        private readonly List<IStartGameListener> _gameStartListeners = new();
 
-        private List<IUpdatable> _updateListeners = new();
-        private List<IFixedUpdatable> _fixedUpdateListeners = new();
+        private readonly List<IUpdatable> _updateListeners = new();
+        private readonly List<IFixedUpdatable> _fixedUpdateListeners = new();
 
         private GameState _state = GameState.None;
         public GameState State
@@ -30,27 +34,8 @@ namespace ShootEmUp
             get => _state;
             set
             {
-                if (_state == value)
-                    return;
-
-                Debug.Log("[GAME] state = " + value.ToString());
-
-                switch (value)
-                {
-                    case GameState.Playng:
-                        if (_state == GameState.None)
-                            StartGame();
-                        else
-                            ResumeGame();
-                        break;
-                    case GameState.Paused:
-                        PauseGame();
-                        break;
-                    case GameState.Finished:
-                        FinishGame();
-                        break;
-                    default: throw new System.NotImplementedException();
-                }
+                if (_state != value)
+                    SetState(value);                
             }
         }
 
@@ -59,11 +44,17 @@ namespace ShootEmUp
             FindSceneAllListeners();
         }
 
-        void FindSceneAllListeners()
+        private void FindSceneAllListeners()
         {
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             foreach (var go in scene.GetRootGameObjects())
                 AddAllListeners(go);
+        }
+
+        public void AddAllListeners(IReadOnlyCollection<IGameManagerListener> listeners)
+        {
+            foreach (var listener in listeners)
+                AddAllListeners(listener);
         }
 
         public void AddAllListeners(GameObject go)
@@ -84,10 +75,77 @@ namespace ShootEmUp
             }
         }
 
-        void IGameManager.AddUpdateListener(IUpdatable updatable)
+        public void AddAllListeners(object obj)
         {
-            if (!_updateListeners.Contains(updatable))
-                _updateListeners.Add(updatable);
+            Add(_updateListeners);
+            Add(_fixedUpdateListeners);
+            Add(_gamePauseListeners);
+            Add(_gameFinishListeners);
+            Add(_gameStartListeners);
+
+            void Add<T>(List<T> list)
+            {
+                if (obj is T typedObj && !list.Contains(typedObj))
+                    list.Add(typedObj);
+            }
+        }
+
+        public void RemoveAllListeners(IReadOnlyCollection<IGameManagerListener> listeners)
+        {
+            foreach (var listener in listeners)
+                RemoveAllListeners(listener);
+        }
+
+        public void RemoveAllListeners(GameObject go)
+        {
+            Remove(_updateListeners);
+            Remove(_fixedUpdateListeners);
+            Remove(_gamePauseListeners);
+            Remove(_gameFinishListeners);
+            Remove(_gameStartListeners);
+
+            void Remove<T>(List<T> list)
+            {
+                foreach (var obj in go.GetComponentsInChildren<T>(true))
+                    list.Remove(obj);
+            }
+        }
+
+        public void RemoveAllListeners(object obj)
+        {
+            Remove(_updateListeners);
+            Remove(_fixedUpdateListeners);
+            Remove(_gamePauseListeners);
+            Remove(_gameFinishListeners);
+            Remove(_gameStartListeners);
+
+            void Remove<T>(List<T> list)
+            {
+                if (obj is T typedObj)
+                    list.Remove(typedObj);
+            }
+        }
+
+        private void SetState(GameState state)
+        {
+            Debug.Log("[GAME] state = " + state.ToString());
+
+            switch (state)
+            {
+                case GameState.Playng:
+                    if (_state == GameState.None)
+                        StartGame();
+                    else
+                        ResumeGame();
+                    break;
+                case GameState.Paused:
+                    PauseGame();
+                    break;
+                case GameState.Finished:
+                    FinishGame();
+                    break;
+                default: throw new System.NotImplementedException();
+            }
         }
 
         private void StartGame()
@@ -122,7 +180,6 @@ namespace ShootEmUp
                 ThrowStateException(GameState.Paused);
 
             _state = GameState.Paused;
-            Time.timeScale = 0;
 
             for (int i = 0; i < _gamePauseListeners.Count; i++)
                 _gamePauseListeners[i].OnGamePaused(true);
@@ -135,7 +192,6 @@ namespace ShootEmUp
                 ThrowStateException(GameState.Playng);
 
             _state = GameState.Playng;
-            Time.timeScale = 1;
 
             for (int i = 0; i < _gamePauseListeners.Count; i++)
                 _gamePauseListeners[i].OnGamePaused(false);

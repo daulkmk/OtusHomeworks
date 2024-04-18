@@ -3,20 +3,13 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public interface IEnemyPositions
-    {
-        Vector3 RandomSpawnPosition();
-        Vector3 RandomAttackPosition();
-    }
-
     public sealed class EnemyPositions : MonoBehaviour, IEnemyPositions
     {
         [SerializeField] private Transform[] _spawnPositions;
-
         [SerializeField] private Transform[] _attackPositions;
 
-        private readonly List<Transform> _unusedAttackPositions = new List<Transform>();
-        private readonly List<Transform> _unusedSpawnPositions = new List<Transform>();
+        private readonly List<Transform> _unusedAttackPositions = new();
+        private readonly List<Transform> _unusedSpawnPositions = new();
 
         public Vector3 RandomSpawnPosition() => RandomPosition(_spawnPositions, _unusedSpawnPositions);
         public Vector3 RandomAttackPosition() => RandomPosition(_attackPositions, _unusedAttackPositions);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -15,8 +13,8 @@ namespace ShootEmUp
 
     public class Instantiator : IInstantiator
     {
-        private DiContainer _diContainer;
-        private IGameManager _gameManager;
+        private readonly DiContainer _diContainer;
+        private readonly IGameManager _gameManager;
 
         public Instantiator(DiContainer diContainer, IGameManager gameManager)
         {

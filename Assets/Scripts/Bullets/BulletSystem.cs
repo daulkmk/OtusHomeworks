@@ -1,43 +1,14 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace ShootEmUp
 {
     using static IBulletSystem;
 
-    public interface IBulletSystem
+    public sealed class BulletSystem : IBulletSystem, IInitializable, IUpdatable
     {
-        public void FireBullet(Args args);
-
-        public struct Args
-        {
-            public Vector2 position;
-            public Vector2 velocity;
-            public Color color;
-            public int physicsLayer;
-            public int damage;
-            public bool isPlayer;
-
-            public static Args Create(BulletConfig bulletConfig, Vector2 position, Vector2 direction, bool isPlayer)
-            {
-                return new Args
-                {
-                    isPlayer = isPlayer,
-                    physicsLayer = (int)bulletConfig.PhysicsLayer,
-                    color = bulletConfig.Color,
-                    damage = bulletConfig.Damage,
-                    position = position,
-                    velocity = direction * bulletConfig.Speed
-                };
-            }
-        }
-    }
-
-    public sealed class BulletSystem : IBulletSystem, IInitializable, IFixedTickable
-    {
-        private ISpawner<Bullet> _bulletSpawner;
-        private IBounds _bounds;
+        private readonly ISpawner<Bullet> _bulletSpawner;
+        private readonly IBounds _bounds;
 
         private readonly List<Bullet> _activeBullets = new();
 
@@ -56,11 +27,11 @@ namespace ShootEmUp
         {
             var bullet = _bulletSpawner.Spawn();
 
+            bullet.Damage = args.damage;
+            bullet.IsPlayer = args.isPlayer;
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
             bullet.SetPhysicsLayer(args.physicsLayer);
-            bullet.damage = args.damage;
-            bullet.isPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
 
             bullet.OnDeath += OnBulletDeath;
@@ -74,12 +45,12 @@ namespace ShootEmUp
             RemoveBullet(bullet);
         }
 
-        void IFixedTickable.FixedTick()
+        void IUpdatable.OnUpdate(float deltaTime)
         {
             for (int i = _activeBullets.Count - 1; i >= 0; i--)
             {
                 var bullet = _activeBullets[i];
-                if (!_bounds.InBounds(bullet.transform.position))
+                if (!_bounds.InBounds(bullet.Position))
                     RemoveBullet(bullet);
             }
         }

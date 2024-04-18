@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
-
 namespace ShootEmUp
 {
-    public class GameGUIController : MonoBehaviour, IPauseGameListener, IFinishGameListener
+    public class GameGUIController : IPauseGameListener, IFinishGameListener
     {
-        [Inject] private UI.IGameGUI _gameGUI;
+        private readonly UI.IGameGUI _gameGUI;
+
+        public GameGUIController(UI.IGameGUI gameGUI)
+        {
+            _gameGUI = gameGUI;
+        }
 
         void IPauseGameListener.OnGamePaused(bool paused)
         {

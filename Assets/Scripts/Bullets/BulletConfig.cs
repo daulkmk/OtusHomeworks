@@ -6,7 +6,7 @@ namespace ShootEmUp
         fileName = "BulletConfig",
         menuName = "Bullets/New BulletConfig"
     )]
-    public sealed class BulletConfig : ScriptableObject
+    public sealed class BulletConfig : ScriptableObject, IBulletConfig
     {
         [field: SerializeField]
         public PhysicsLayer PhysicsLayer { get; private set; }

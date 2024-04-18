@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +7,6 @@ namespace ShootEmUp
     {
         [SerializeField] private UI.GameGUI _gameGUI;
 
-        [SerializeField] private BulletSpawner _bulletSpawner;
-        [SerializeField] private EnemySpawner _enemySpawner;
-
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<GameManager>().AsSingle();
@@ -20,13 +15,15 @@ namespace ShootEmUp
             Container.BindInterfacesTo<InputManager>().AsSingle();
 
             BindInterfacesAndInject(_gameGUI);
-            BindInterfacesAndInject(_bulletSpawner);
-            
+
             Container.BindInterfacesTo<BulletSystem>().AsSingle().NonLazy();
-
-            BindInterfacesAndInject(_enemySpawner);
-
             Container.BindInterfacesTo<EnemyManager>().AsSingle();
+
+            Container.BindInterfacesTo<StartGameTrigger>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<PauseGameTrigger>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<EndGameController>().AsSingle().NonLazy();
+
+            Container.BindInterfacesTo<GameGUIController>().AsSingle();
         }
 
         private void BindInterfacesAndInject<T>(T obj)

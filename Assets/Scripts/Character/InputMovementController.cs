@@ -1,17 +1,22 @@
 using UnityEngine;
-using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class InputMovementController : MonoBehaviour, IFixedUpdatable
+    public sealed class InputMovementController : IFixedUpdatable
     {
-        [Inject] private IInputManager _inputManager;
-        [Inject] private IMoveComponent _moveComponent;
+        private readonly IInputManager _inputManager;
+        private readonly IMove _moveComponent;
+
+        public InputMovementController(IInputManager inputManager, IMove moveComponent)
+        {
+            _inputManager = inputManager;
+            _moveComponent = moveComponent;
+        }
 
         void IFixedUpdatable.OnFixedUpdate(float deltaTime)
         {
             var direction = new Vector2(_inputManager.HorizontalDirection, 0);
-            _moveComponent.FixedMove(direction);
+            _moveComponent.FixedMove(direction, deltaTime);
         }
     }
 }

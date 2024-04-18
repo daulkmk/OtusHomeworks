@@ -1,27 +1,33 @@
 namespace ShootEmUp
 {
-    public interface IPauseGameListener
+    public interface IPauseGameListener : IGameManagerListener
     {
         void OnGamePaused(bool paused);
     }
 
-    public interface IFinishGameListener
+    public interface IFinishGameListener : IGameManagerListener
     {
         void OnGameFinished();
     }
 
-    public interface IStartGameListener
+    public interface IStartGameListener : IGameManagerListener
     {
         void OnGameStarting();
     }
 
-    public interface IUpdatable
+    public interface IUpdatable : IGameManagerListener
     {
         void OnUpdate(float deltaTime);
     }
 
-    public interface IFixedUpdatable
+    public interface IFixedUpdatable : IGameManagerListener
     {
         void OnFixedUpdate(float deltaTime);
+    }
+
+    //To simplify interfaces aggregation
+    public interface IGameManagerListener
+    {
+
     }
 }

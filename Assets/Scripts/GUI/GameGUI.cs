@@ -1,22 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShootEmUp.UI
 {
-    public interface IGameGUI
-    {
-        public event Action OnPauseRequested;
-        public event Action OnResumeRequested;
-
-        public void ShowStartGameSequence(Action onComplete);
-
-        public void ShowPause();
-        public void ShowGame();
-        public void ShowGameOver();
-    }
-
     public class GameGUI : MonoBehaviour, IGameGUI
     {
         [SerializeField] private SingleButtonScreen _startScreen;

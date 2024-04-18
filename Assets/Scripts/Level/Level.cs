@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,11 +8,18 @@ namespace ShootEmUp
     {
         [SerializeField] private float timeBetweenSpawns = 1;
 
-        [Inject] private Character _character;
-        [Inject] private IEnemyManager _enemyManager;
+        private Character _character;
+        private IEnemyManager _enemyManager;
 
         private Coroutine _spawnLoopCoroutine = null;
         private bool _pauseSpawn = true;
+
+        [Inject]
+        private void Construct(Character character, IEnemyManager enemyManager)
+        {
+            _character = character;
+            _enemyManager = enemyManager;
+        }
 
         private IEnumerator SpawnLoop()
         {
@@ -24,7 +30,7 @@ namespace ShootEmUp
                 while (_pauseSpawn)
                     yield return null;
 
-                _enemyManager.TryToSpawnEnemy(_character.transform);
+                _enemyManager.TryToSpawnEnemy(_character.GameObject.Transform);
             }
         }
 

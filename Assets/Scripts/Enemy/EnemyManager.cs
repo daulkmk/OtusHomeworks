@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
-
 namespace ShootEmUp
 {
-    public interface IEnemyManager
-    {
-        void TryToSpawnEnemy(Transform attackTarget);
-    }
-
     public sealed class EnemyManager : IEnemyManager
     {
-        private ISpawner<AICharacter> _enemySpawner;
-        private IEnemyPositions _enemyPositions;
+        private readonly ISpawner<AICharacter> _enemySpawner;
+        private readonly IEnemyPositions _enemyPositions;
 
         public EnemyManager(ISpawner<AICharacter> spawner, IEnemyPositions positions)
         {
@@ -21,7 +11,7 @@ namespace ShootEmUp
             _enemyPositions = positions;
         }
 
-        public void TryToSpawnEnemy(Transform attackTarget)
+        public void TryToSpawnEnemy(ITransform attackTarget)
         {
             if (!_enemySpawner.Initialized)
                 _enemySpawner.Initialize();
@@ -31,7 +21,7 @@ namespace ShootEmUp
                 return;
 
             var spawnPosition = _enemyPositions.RandomSpawnPosition();
-            enemy.transform.position = spawnPosition;
+            enemy.SetPosition(spawnPosition);
 
             var attackPosition = _enemyPositions.RandomAttackPosition();
 
