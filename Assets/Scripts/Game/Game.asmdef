@@ -1,8 +1,11 @@
 {
-    "name": "SaveSystem",
+    "name": "Game",
     "rootNamespace": "",
     "references": [
-        "UniTask"
+        "UniTask",
+        "Zenject",
+        "GameEngine",
+        "SaveSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
