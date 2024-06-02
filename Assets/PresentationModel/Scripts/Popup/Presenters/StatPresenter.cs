@@ -1,4 +1,3 @@
-using System;
 using Lessons.Architecture.PM;
 using UniRx;
 
@@ -21,6 +20,8 @@ namespace ShootEmUp.PresentationModel
             _value = new ReactiveProperty<string>(_stat.Value.ToString());
             _stat.OnValueChanged += OnValueChanged;
         }
+
+        public string GetText() => $"{Name.Value}: {Value}";
 
         private void OnValueChanged(int value) => _value.Value = value.ToString();
 

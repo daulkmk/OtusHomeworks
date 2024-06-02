@@ -5,14 +5,13 @@ namespace ShootEmUp.PresentationModel
 {
     public interface IPopupView
     {
-        Text Name { get; }
-        Text Description { get; }
-        Text Level { get; }
-        Image Icon { get; }
-        ProgressBar ExpProgressBar { get; }
-        LevelUpButton LevelUpButton { get; }
-        StatsList StatsList { get; }
+        IProgressBarView ExpProgressBarView { get; }
+        IDescriptionView DescriptionView { get; }
+        IStatsView StatsView { get; }
+
+        IButtonView LevelUpButtonView { get; }
+
         Button CloseButton { get; }
-        GameObject GameObject{ get; }
+        GameObject GameObject { get; }
     }
 }
