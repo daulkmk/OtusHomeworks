@@ -68,6 +68,17 @@ public class DEBUG : MonoBehaviour
     }
 
     [Button]
+    private void Spawn(Unit unit)
+    {
+        ValidatePlaymode();
+
+        var newUnit = _unitManager.SpawnUnit(unit, unit.Position, Quaternion.Euler(unit.Rotation));
+        newUnit.gameObject.SetActive(true);
+
+        UnityEditor.Selection.activeGameObject = newUnit.gameObject;
+    }
+
+    [Button]
     private void DestroyNextUnit()
     {
         ValidatePlaymode();
