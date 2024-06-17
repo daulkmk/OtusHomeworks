@@ -8,6 +8,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private Transform _unitsContainer;
     [SerializeField] private UnitPrefabsRegistry _unitPrefabsRegistry;
     [SerializeField] private ResourcesOnScene _resourcesOnScene;
+    [SerializeField] private UnitsOnScene _unitsOnScene;
 
     public override void InstallBindings()
     {
@@ -20,6 +21,9 @@ public class GameInstaller : MonoInstaller
     private void BindSaveLoadService()
     {
         Container.BindInterfacesTo<AesCryptographyService>()
+            .AsSingle();
+
+        Container.BindInterfacesTo<LocalFilesContainer>()
             .AsSingle();
 
         Container.BindInterfacesTo<GameRepository>()
@@ -41,11 +45,16 @@ public class GameInstaller : MonoInstaller
         Container.QueueForInject(unitManager);
 
         Container.BindInterfacesAndSelfTo<UnitPrefabsRegistry>()
-                    .FromInstance(_unitPrefabsRegistry)
-                    .AsSingle();
+            .FromInstance(_unitPrefabsRegistry)
+            .AsSingle();
 
         Container.QueueForInject(_unitPrefabsRegistry);
 
+        Container.BindInterfacesAndSelfTo<UnitsOnScene>()
+            .FromInstance(_unitsOnScene)
+            .AsSingle();
+
+        Container.QueueForInject(_unitsOnScene);
 
         Container.BindInterfacesAndSelfTo<UnitsSaveLoader>()
             .AsSingle();
@@ -57,17 +66,17 @@ public class GameInstaller : MonoInstaller
             .AsSingle();
 
         Container.BindInterfacesAndSelfTo<ResourcesOnScene>()
-                    .FromInstance(_resourcesOnScene)
-                    .AsSingle();
+            .FromInstance(_resourcesOnScene)
+            .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<ResourcesSaveLoad>()
+        Container.BindInterfacesAndSelfTo<ResourcesSaveLoader>()
             .AsSingle();
     }
 
     private void BindGameControllers()
     {
         Container.BindInterfacesAndSelfTo<GameController>()
-                    .AsSingle()
-                    .NonLazy();
+            .AsSingle()
+            .NonLazy();
     }
 }

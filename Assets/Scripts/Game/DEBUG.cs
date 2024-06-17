@@ -8,48 +8,59 @@ using Zenject;
 //Use me for tests
 public class DEBUG : MonoBehaviour
 {
-    [SerializeField] private List<Unit> _unitsToSpawn;
-
     private UnitManager _unitManager;
     private IGameRepository _gameRepository;
     private SaveLoadService _saveLoadSystem;
     private ResourceService _resourceService;
+    private UnitsOnScene _unitsOnScene;
 
     [Inject]
-    private void Construct(UnitManager unitManager, ResourceService resourceService, IGameRepository gameRepository, SaveLoadService saveLoadSystem)
+    private void Construct(UnitManager unitManager, UnitsOnScene unitsOnScene, ResourceService resourceService, IGameRepository gameRepository, SaveLoadService saveLoadSystem)
     {
         _unitManager = unitManager;
         _gameRepository = gameRepository;
         _saveLoadSystem = saveLoadSystem;
         _resourceService = resourceService;
+        _unitsOnScene = unitsOnScene;
     }
 
     [Button]
     private void ClearData()
     {
         //To use when game is not running
-        _gameRepository ??= new GameRepository(new AesCryptographyService());
+        _gameRepository ??= new GameRepository(new LocalFilesContainer(new AesCryptographyService()));
 
-        _gameRepository.Delete(UnitsSaveLoader.s_repositoryKey);
+        _gameRepository.DeleteAll();
     }
 
     [Button]
     private void Save()
     {
-        if (!Application.IsPlaying(gameObject))
-            return;
+        ValidatePlaymode();
 
         Debug.Log("SAVE");
         _saveLoadSystem.Save();
     }
 
     [Button]
-    private void SpawnUnits()
+    private void Load()
     {
-        if (!Application.IsPlaying(gameObject))
-            return;
+        ValidatePlaymode();
 
-        foreach (var unit in _unitsToSpawn)
+        DestroyAllUnits();
+
+        _saveLoadSystem.Load();
+    }
+    
+    [PropertySpace]
+    [Button]
+    private void DestroyActiveUnitsAndSpawnNew()
+    {
+        ValidatePlaymode();
+
+        DestroyAllUnits();
+
+        foreach (var unit in _unitsOnScene.Prefabs)
         {
             var spawnedUnit = _unitManager.SpawnUnit(unit, unit.Position, Quaternion.Euler(unit.Rotation));
             spawnedUnit.gameObject.SetActive(true);
@@ -59,21 +70,20 @@ public class DEBUG : MonoBehaviour
     [Button]
     private void DestroyNextUnit()
     {
-        if (!Application.IsPlaying(gameObject))
-            return;
+        ValidatePlaymode();
 
         var enumerator = _unitManager.GetAllUnits().GetEnumerator();
         if (enumerator.MoveNext())
             _unitManager.DestroyUnit(enumerator.Current);
         else
-            Debug.Log("All units destroyed! Respawn them with button " + nameof(SpawnUnits));
+            Debug.Log("All units destroyed! Respawn them with a button " + nameof(DestroyActiveUnitsAndSpawnNew));
     }
 
+    [PropertySpace]
     [Button]
     private void RefillResources()
     {
-        if (!Application.IsPlaying(gameObject))
-            return;
+        ValidatePlaymode();
 
         foreach (var resource in _resourceService.GetResources())
             resource.Amount = 5;
@@ -84,8 +94,7 @@ public class DEBUG : MonoBehaviour
     [Button]
     private void EmptyNextResource()
     {
-        if (!Application.IsPlaying(gameObject))
-            return;
+        ValidatePlaymode();
 
         foreach (var resource in _resourceService.GetResources())
         {
@@ -98,5 +107,21 @@ public class DEBUG : MonoBehaviour
         }
 
         Debug.Log("All resources are empty!");
+    }
+
+    private void ValidatePlaymode()
+    {
+        if (!Application.IsPlaying(gameObject))
+            throw new System.Exception("Works only in play mode!");
+    }
+
+    private void DestroyAllUnits()
+    {
+        var units = new List<Unit>(_unitManager.GetAllUnits());
+        foreach (var unit in units)
+        {
+            if (unit != null)
+                _unitManager.DestroyUnit(unit);
+        }
     }
 }

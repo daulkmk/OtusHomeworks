@@ -8,5 +8,6 @@ namespace SaveLoad
         public UniTask<T> Load<T>(string key, T defaultValue = default);
         public UniTask<bool> ContainsKey(string key);
         public UniTask Delete(string key);
+        public UniTask DeleteAll();
     }
 }
