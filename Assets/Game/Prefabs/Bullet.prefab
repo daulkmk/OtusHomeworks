@@ -92,15 +92,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1325598434542729995}
+  - component: {fileID: 4922822409946463939}
   - component: {fileID: -4554007514668407227}
   - component: {fileID: 9162851914639640199}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1325598434542729995
 Transform:
   m_ObjectHideFlags: 0
@@ -117,6 +118,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4922822409946463939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071663250927276774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2104f73cad85c464395145219ba28512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  MoveComponent:
+    MoveDirectionWorld:
+      value: {x: 0, y: 0, z: 0}
+    IsMoving:
+      value: 0
+    Root: {fileID: 1325598434542729995}
+    _speed: 15
+    _moveInLocalDirection: 0
+    _canMove: 1
 --- !u!54 &-4554007514668407227
 Rigidbody:
   m_ObjectHideFlags: 0
