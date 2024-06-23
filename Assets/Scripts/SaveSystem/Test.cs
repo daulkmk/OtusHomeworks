@@ -1,18 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System.Security.Cryptography;
+using Sirenix.OdinInspector;
 
 namespace SaveLoad
 {
     public class Test : MonoBehaviour
     {
-        [ContextMenu("TEST")]
+        [Button("TEST")]
         public async UniTask Test_()
         {
-            var repo = new GameRepository(new LocalFilesContainer(new AesCryptographyService()));
+            var repo = new GameRepository(new EncryptedSavesContainer(new LocalFilesContainer(), new AesCryptographyService()));
 
             try
             {
@@ -28,7 +27,7 @@ namespace SaveLoad
             }
         }
 
-        [ContextMenu("Generate Key/IV")]
+        [Button("Generate Key/IV")]
         public void GenerateKey()
         {
             using (var aes = Aes.Create())

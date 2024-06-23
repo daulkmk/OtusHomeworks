@@ -1,9 +1,7 @@
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Newtonsoft.Json;
 
 namespace SaveLoad
 {
@@ -12,13 +10,6 @@ namespace SaveLoad
     {
         private const string s_saveFileExtension = ".bytes";
         private const string s_savesRootDirectory = "Saves";
-
-        private readonly ICryptographyService _cryptographyService = null;
-
-        public LocalFilesContainer(ICryptographyService cryptographyService)
-        {
-            _cryptographyService = cryptographyService;
-        }
 
         public UniTask<bool> ContainsKey(string key, int saveSlot)
         {
@@ -43,7 +34,7 @@ namespace SaveLoad
         public UniTask DeleteAll()
         {
             var root = GetSaveRootDirectoryPath();
-            
+
             if (Directory.Exists(root))
                 Directory.Delete(root, true);
 
@@ -57,9 +48,7 @@ namespace SaveLoad
                 var filePath = GetFilePath(key, saveSlot);
                 var bytes = await File.ReadAllBytesAsync(filePath);
 
-                bytes = await _cryptographyService.Decrypt(bytes);
-
-                return ByteArrayToObject<T>(bytes);
+                return SaveUtils.ByteArrayToObject<T>(bytes);
             }
 
             return defaultValue;
@@ -69,30 +58,28 @@ namespace SaveLoad
         {
             MakeSureSaveSlotDirectoryExists(saveSlot);
 
-            var bytes = ObjectToByteArray(obj);
-
-            bytes = await _cryptographyService.Encrypt(bytes);
-            
+            var bytes = SaveUtils.ObjectToByteArray(obj);
             var filePath = GetFilePath(key, saveSlot);
+
             await File.WriteAllBytesAsync(filePath, bytes);
         }
 
-        private static string KeyToFileName(string key) => key + s_saveFileExtension;
+        private string KeyToFileName(string key) => key + s_saveFileExtension;
 
-        public static string GetFilePath(string key, int saveSlot)
+        public string GetFilePath(string key, int saveSlot)
         {
             return Path.Combine(GetSlotDirectoryPath(saveSlot), KeyToFileName(key));
         }
-        private static string GetSlotDirectoryPath(int saveSlot)
+        private string GetSlotDirectoryPath(int saveSlot)
         {
             return Path.Combine(GetSaveRootDirectoryPath(), saveSlot.ToString());
         }
-        private static string GetSaveRootDirectoryPath() 
+        private string GetSaveRootDirectoryPath()
         {
             return Path.Combine(Application.persistentDataPath, s_savesRootDirectory);
         }
 
-        private static void MakeSureSaveSlotDirectoryExists(int saveSlot)
+        private void MakeSureSaveSlotDirectoryExists(int saveSlot)
         {
             var root = GetSaveRootDirectoryPath();
             CreateDirectoryIfNotExists(root);
@@ -100,41 +87,14 @@ namespace SaveLoad
             var slot = GetSlotDirectoryPath(saveSlot);
             CreateDirectoryIfNotExists(slot);
         }
-        private static void CreateDirectoryIfNotExists(string directory)
+        private void CreateDirectoryIfNotExists(string directory)
         {
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
         }
-        private static bool IsDirectoryEmpty(string path)
+        private bool IsDirectoryEmpty(string path)
         {
             return !Directory.EnumerateFileSystemEntries(path).Any();
-        }
-
-        private static byte[] ObjectToByteArray<T>(T obj)
-        {
-            string json = JsonConvert.SerializeObject(obj, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
-
-            var bf = new BinaryFormatter();
-            using var ms = new MemoryStream();
-        
-            bf.Serialize(ms, json);
-            return ms.ToArray();
-        }
-
-        private T ByteArrayToObject<T>(byte[] arrBytes)
-        {
-            var binForm = new BinaryFormatter();
-            using var memStream = new MemoryStream();
-
-            memStream.Write(arrBytes, 0, arrBytes.Length);
-            memStream.Seek(0, SeekOrigin.Begin);
-
-            var json = (string)binForm.Deserialize(memStream);
-
-            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }

@@ -7,8 +7,8 @@ public class GameInstaller : MonoInstaller
 {
     [SerializeField] private Transform _unitsContainer;
     [SerializeField] private UnitPrefabsRegistry _unitPrefabsRegistry;
-    [SerializeField] private ResourcesOnScene _resourcesOnScene;
-    [SerializeField] private UnitsOnScene _unitsOnScene;
+    [SerializeField] private SceneResources _resourcesOnScene;
+    [SerializeField] private SceneUnits _unitsOnScene;
 
     public override void InstallBindings()
     {
@@ -23,8 +23,9 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesTo<AesCryptographyService>()
             .AsSingle();
 
-        Container.BindInterfacesTo<LocalFilesContainer>()
-            .AsSingle();
+        Container.BindInterfacesTo<EncryptedSavesContainer>()
+            .AsSingle()
+            .WithArguments(new LocalFilesContainer());
 
         Container.BindInterfacesTo<GameRepository>()
             .AsSingle();
@@ -50,7 +51,7 @@ public class GameInstaller : MonoInstaller
 
         Container.QueueForInject(_unitPrefabsRegistry);
 
-        Container.BindInterfacesAndSelfTo<UnitsOnScene>()
+        Container.BindInterfacesAndSelfTo<SceneUnits>()
             .FromInstance(_unitsOnScene)
             .AsSingle();
 
@@ -65,7 +66,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<ResourceService>()
             .AsSingle();
 
-        Container.BindInterfacesAndSelfTo<ResourcesOnScene>()
+        Container.BindInterfacesAndSelfTo<SceneResources>()
             .FromInstance(_resourcesOnScene)
             .AsSingle();
 

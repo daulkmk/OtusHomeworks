@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using GameEngine;
 using UnityEngine;
 
-public class UnitsOnScene : MonoBehaviour
+public class SceneUnits : MonoBehaviour
 {
     [SerializeField] private List<Unit> _initialUnits;
 
     public IReadOnlyList<Unit> Prefabs => _initialUnits;
-    public IReadOnlyList<UnitSnapshot> InitialUnits => _initialUnits.ConvertAll(x => new UnitSnapshot(x));
+    public IReadOnlyList<UnitData> InitialUnits => _initialUnits.ConvertAll(x => new UnitData(x));
 }

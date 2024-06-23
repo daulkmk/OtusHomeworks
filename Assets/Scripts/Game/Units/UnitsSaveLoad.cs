@@ -3,50 +3,50 @@ using SaveLoad;
 using GameEngine;
 using System.Collections.Generic;
 
-public class UnitsSaveLoader : AbstractSaveLoader<UnitManagerSnapshot>
+public class UnitsSaveLoader : SaveLoader<UnitManagerData>
 {
     private readonly UnitManager _unitsManager;
     private readonly UnitPrefabsRegistry _prefabsRegistry;
-    private readonly UnitsOnScene _unitsOnScene;
+    private readonly SceneUnits _sceneUnits;
 
-    public UnitsSaveLoader(IGameRepository repository, UnitsOnScene unitsOnScene, UnitPrefabsRegistry prefabsRegistry, UnitManager unitManager)
+    public UnitsSaveLoader(IGameRepository repository, SceneUnits sceneUnits, UnitPrefabsRegistry prefabsRegistry, UnitManager unitManager)
         : base(repository)
     {
         _unitsManager = unitManager;
         _prefabsRegistry = prefabsRegistry;
-        _unitsOnScene = unitsOnScene;
+        _sceneUnits = sceneUnits;
     }
 
-    protected override UnitManagerSnapshot CreateSnapshot()
+    protected override UnitManagerData CreateData()
     {
-        return new UnitManagerSnapshot(_unitsManager);
+        return new UnitManagerData(_unitsManager);
     }
 
-    protected override void LoadWithoutSnapshot()
+    protected override void LoadWithoutData()
     {
-        LoadUnits(_unitsOnScene.InitialUnits);
+        LoadUnits(_sceneUnits.InitialUnits);
     }
 
-    protected override void LoadWithSnapshot(UnitManagerSnapshot unitsSnapshot)
+    protected override void LoadWithData(UnitManagerData unitsData)
     {
-        LoadUnits(unitsSnapshot.units);
+        LoadUnits(unitsData.units);
     }
 
-    private void LoadUnits(IReadOnlyCollection<UnitSnapshot> units)
+    private void LoadUnits(IReadOnlyCollection<UnitData> units)
     {
-        foreach (var snapshot in units)
+        foreach (var data in units)
         {
-            var prefab = _prefabsRegistry.GetUnitPrefabByType(snapshot.type);
+            var prefab = _prefabsRegistry.GetUnitPrefabByType(data.type);
 
             var unit = _unitsManager.SpawnUnit(
                 prefab: prefab,
-                position: snapshot.position,
-                rotation: Quaternion.Euler(snapshot.rotation)
+                position: data.position,
+                rotation: Quaternion.Euler(data.rotation)
             );
 
-            unit.HitPoints = snapshot.hitPoints;
+            unit.HitPoints = data.hitPoints;
 
-            Debug.Log($"Load unit {snapshot.type} {snapshot.hitPoints} {snapshot.position} {snapshot.rotation}");
+            Debug.Log($"Load unit {data.type} {data.hitPoints} {data.position} {data.rotation}");
         }
     }
 }

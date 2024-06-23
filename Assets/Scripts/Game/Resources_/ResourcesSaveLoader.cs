@@ -4,48 +4,48 @@ using GameEngine;
 using SaveLoad;
 using UnityEngine;
 
-public class ResourcesSaveLoader : AbstractSaveLoader<ResourceServiceSnapshot>
+public class ResourcesSaveLoader : SaveLoader<ResourceServiceData>
 {
     private readonly ResourceService _resourceService;
-    private readonly ResourcesOnScene _resourcesOnScene;
+    private readonly SceneResources _sceneResources;
 
-    public ResourcesSaveLoader(ResourceService resourceService, ResourcesOnScene resourcesOnScene, IGameRepository gameRepository)
+    public ResourcesSaveLoader(ResourceService resourceService, SceneResources sceneResources, IGameRepository gameRepository)
         : base(gameRepository)
     {
         _resourceService = resourceService;
-        _resourcesOnScene = resourcesOnScene;
+        _sceneResources = sceneResources;
     }
 
-    protected override ResourceServiceSnapshot CreateSnapshot()
+    protected override ResourceServiceData CreateData()
     {
-        return new ResourceServiceSnapshot(_resourceService);
+        return new ResourceServiceData(_resourceService);
     }
 
-    protected override void LoadWithoutSnapshot()
+    protected override void LoadWithoutData()
     {
-        var resourceObjects = _resourcesOnScene.Resources;
+        var resourceObjects = _sceneResources.Resources;
         _resourceService.SetResources(resourceObjects);
     }
 
-    protected override void LoadWithSnapshot(ResourceServiceSnapshot snapshot)
+    protected override void LoadWithData(ResourceServiceData data)
     {
-        var resourceObjects = _resourcesOnScene.Resources;
-        ApplySnapshotToExistingResourses(resourceObjects, snapshot);
+        var resourceObjects = _sceneResources.Resources;
+        ApplyDataToExistingResourses(resourceObjects, data);
         _resourceService.SetResources(resourceObjects);
     }
 
-    private void ApplySnapshotToExistingResourses(IReadOnlyList<Resource> resourceObjects, ResourceServiceSnapshot snapshot)
+    private void ApplyDataToExistingResourses(IReadOnlyList<Resource> resourceObjects, ResourceServiceData data)
     {
-        foreach (var resourceSnapshot in snapshot.resources)
+        foreach (var resourceData in data.resources)
         {
-            var resourceObject = resourceObjects.FirstOrDefault(x => x.ID == resourceSnapshot.id);
+            var resourceObject = resourceObjects.FirstOrDefault(x => x.ID == resourceData.id);
             if (resourceObject != null)
             {
-                resourceObject.Amount = resourceSnapshot.amount;
-                Debug.Log($"Load resource {resourceSnapshot.id} : {resourceSnapshot.amount}");
+                resourceObject.Amount = resourceData.amount;
+                Debug.Log($"Load resource {resourceData.id} : {resourceData.amount}");
             }
             else
-                Debug.Log("Cannot find resource object with id: " + resourceSnapshot.id);
+                Debug.Log("Cannot find resource object with id: " + resourceData.id);
         }
     }
 }

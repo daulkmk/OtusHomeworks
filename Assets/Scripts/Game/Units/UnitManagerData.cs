@@ -3,30 +3,30 @@ using GameEngine;
 using UnityEngine;
 
 [System.Serializable]
-public struct UnitManagerSnapshot
+public struct UnitManagerData
 {
-    public List<UnitSnapshot> units;
+    public List<UnitData> units;
 
-    public UnitManagerSnapshot(UnitManager unitManager)
+    public UnitManagerData(UnitManager unitManager)
     {
         units = new();
         foreach (var unit in unitManager.GetAllUnits())
         {
             if (unit != null)
-                units.Add(new UnitSnapshot(unit));
+                units.Add(new UnitData(unit));
         }
     }
 }
 
 [System.Serializable]
-public struct UnitSnapshot
+public struct UnitData
 {
     public string type;
     public int hitPoints;
     public Vector3 position;
     public Vector3 rotation;
 
-    public UnitSnapshot(Unit unit)
+    public UnitData(Unit unit)
     {
         type = unit.Type;
         hitPoints = unit.HitPoints;

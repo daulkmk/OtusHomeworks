@@ -12,23 +12,23 @@ public class DEBUG : MonoBehaviour
     private IGameRepository _gameRepository;
     private SaveLoadService _saveLoadSystem;
     private ResourceService _resourceService;
-    private UnitsOnScene _unitsOnScene;
+    private SceneUnits _sceneUnits;
 
     [Inject]
-    private void Construct(UnitManager unitManager, UnitsOnScene unitsOnScene, ResourceService resourceService, IGameRepository gameRepository, SaveLoadService saveLoadSystem)
+    private void Construct(UnitManager unitManager, SceneUnits unitsOnScene, ResourceService resourceService, IGameRepository gameRepository, SaveLoadService saveLoadSystem)
     {
         _unitManager = unitManager;
         _gameRepository = gameRepository;
         _saveLoadSystem = saveLoadSystem;
         _resourceService = resourceService;
-        _unitsOnScene = unitsOnScene;
+        _sceneUnits = unitsOnScene;
     }
 
     [Button]
     private void ClearData()
     {
         //To use when game is not running
-        _gameRepository ??= new GameRepository(new LocalFilesContainer(new AesCryptographyService()));
+        _gameRepository ??= new GameRepository(new LocalFilesContainer());
 
         _gameRepository.DeleteAll();
     }
@@ -60,7 +60,7 @@ public class DEBUG : MonoBehaviour
 
         DestroyAllUnits();
 
-        foreach (var unit in _unitsOnScene.Prefabs)
+        foreach (var unit in _sceneUnits.Prefabs)
         {
             var spawnedUnit = _unitManager.SpawnUnit(unit, unit.Position, Quaternion.Euler(unit.Rotation));
             spawnedUnit.gameObject.SetActive(true);
