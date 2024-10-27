@@ -17,11 +17,11 @@ TagManager:
   - 
   - 
   - 
-  - Character
-  - Enemy
+  - Team-1
+  - Team-2
   - 
-  - EnemyBullet
-  - PlayerBullet
+  - Team-bullet-1
+  - Team-bullet-2
   - 
   - 
   - 

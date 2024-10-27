@@ -13,17 +13,6 @@ namespace Client.Systems
         {
             float deltaTime = Time.deltaTime;
 
-            #region MyRegion
-
-            // EcsWorld world = systems.GetWorld();
-            // EcsFilter filter = world.Filter<MoveDirection>().Inc<MoveSpeed>().Inc<Position>().End();
-            //
-            // EcsPool<MoveDirection> directionPool = world.GetPool<MoveDirection>();
-            // EcsPool<MoveSpeed> speedPool = world.GetPool<MoveSpeed>();
-            // EcsPool<Position> positionPool = world.GetPool<Position>();
-
-            #endregion
-
             EcsPool<MoveDirection> directionPool = _filter.Pools.Inc1;
             EcsPool<MoveSpeed> speedPool = _filter.Pools.Inc2;
             EcsPool<Position> positionPool = _filter.Pools.Inc3;
