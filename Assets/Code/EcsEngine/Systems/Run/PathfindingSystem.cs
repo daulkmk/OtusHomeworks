@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client
 {
-    sealed class PathfindingSystem : IEcsRunSystem
+    public sealed class PathfindingSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Side, MoveDirection>> _filter;
 

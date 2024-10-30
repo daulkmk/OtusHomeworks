@@ -4,7 +4,7 @@ using Leopotam.EcsLite.Di;
 
 namespace Client
 {
-    sealed class DamageSystem : IEcsRunSystem
+    public sealed class DamageSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Health, Damage>> _filter;
 

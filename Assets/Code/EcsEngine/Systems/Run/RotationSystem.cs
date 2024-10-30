@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client
 {
-    sealed class RotationSystem : IEcsRunSystem
+    public sealed class RotationSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<RotationDirection, RotationSpeed, Rotation>> _filter;
 

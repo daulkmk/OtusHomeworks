@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client
 {
-    sealed class AimSystem : IEcsRunSystem
+    public sealed class AimSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<AttackTarget, Rotation, RotationDirection, Accuracy>> _filter;
         private readonly EcsPoolInject<Position> _poolPositions;

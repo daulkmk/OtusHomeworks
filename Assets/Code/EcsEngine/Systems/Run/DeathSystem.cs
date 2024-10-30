@@ -5,7 +5,7 @@ using Leopotam.EcsLite.Entities;
 
 namespace Client
 {
-    sealed class DeathSystem : IEcsRunSystem
+    public sealed class DeathSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Health, TransformView>> _filter;
         private readonly EcsCustomInject<EntityManager> _entityManager;

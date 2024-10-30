@@ -4,7 +4,7 @@ using Leopotam.EcsLite.Di;
 
 namespace Client
 {
-    sealed class ProjectileDamageSystem : IEcsRunSystem
+    public sealed class ProjectileDamageSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Collision, DamageSource, Health>> _filter;
         private readonly EcsPoolInject<Damage> _poolDamage;
@@ -25,19 +25,19 @@ namespace Client
                 ApplyDamage(collision.Entity, damageSource.Value);
                 //Deal damage to self (destroy projectile)
                 ApplyDamage(entity, damageSource.Value);
+            }
 
-                void ApplyDamage(int entityToDamage, int damageValue)
+            void ApplyDamage(int entityToDamage, int damageValue)
+            {
+                if (poolDamage.Has(entityToDamage))
                 {
-                    if (poolDamage.Has(entityToDamage))
-                    {
-                        ref Damage damage = ref poolDamage.Get(entityToDamage);
-                        damage.Value += damageSource.Value;
-                    }
-                    else
-                    {
-                        ref Damage damage = ref poolDamage.Add(entityToDamage);
-                        damage.Value = damageSource.Value;
-                    }
+                    ref Damage damage = ref poolDamage.Get(entityToDamage);
+                    damage.Value += damageValue;
+                }
+                else
+                {
+                    ref Damage damage = ref poolDamage.Add(entityToDamage);
+                    damage.Value = damageValue;
                 }
             }
         }

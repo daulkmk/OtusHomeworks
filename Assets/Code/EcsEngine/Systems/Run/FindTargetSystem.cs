@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Client
 {
-    sealed class FindTargetSystem : IEcsRunSystem
+    public sealed class FindTargetSystem : IEcsRunSystem
     {
         private readonly EcsFilterInject<Inc<Side, Position, AttackRange>> _filterAttackers;
         private readonly EcsFilterInject<Inc<Side, Position>> _filterTargets;
