@@ -1,0 +1,29 @@
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Entities;
+using Lessons.Entities.Common.Components;
+using UnityEngine;
+
+namespace Lessons.Game.Turn.Visual.Tasks
+{
+    public sealed class AttackVisualTask : Task
+    {
+        private readonly TransformComponent _transform;
+        private readonly Vector3 _position;
+        private readonly float _duration;
+
+        public AttackVisualTask(IEntity entity, Vector3 position, float duration = 0.15f)
+        {
+            _transform = entity.Get<TransformComponent>();
+            _position = position;
+            _duration = duration;
+        }
+
+        protected override UniTask OnRun()
+        {
+            return _transform.Value.DOMove(_position, _duration)
+                .SetLoops(2, LoopType.Yoyo)
+                .ToUniTask();
+        }
+    }
+}

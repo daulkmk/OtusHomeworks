@@ -284,6 +284,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383512545514860529}
+  - component: {fileID: 1705999224153609921}
+  - component: {fileID: 2797204688028773731}
   - component: {fileID: 8763992113062683896}
   m_Layer: 5
   m_Name: HeroView
@@ -314,6 +316,43 @@ RectTransform:
   m_AnchoredPosition: {x: -729.51, y: 270}
   m_SizeDelta: {x: 460, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1705999224153609921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f839a167ed12347548ea7a7de38c34ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2797204688028773731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383512545514860528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601d4b8e8c6bf4358b7f4913e7f29c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initOnAwake: 1
+  position:
+    transform: {fileID: 0}
+    coordinates:
+      value: {x: 0, y: 0}
+  life:
+    isDead:
+      value: 0
+    hitPoints:
+      value: 1
+    maxHitPoints:
+      value: 1
+  view: {fileID: 8763992113062683896}
 --- !u!114 &8763992113062683896
 MonoBehaviour:
   m_ObjectHideFlags: 0
