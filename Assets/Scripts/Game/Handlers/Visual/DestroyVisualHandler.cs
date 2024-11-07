@@ -7,15 +7,17 @@ namespace Lessons.Game.Handlers.Visual
     public sealed class DestroyVisualHandler : BaseHandler<DestroyEvent>
     {
         private readonly VisualPipeline _visualPipeline;
-        
-        public DestroyVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
+        private readonly AudioPlayer _audioPlayer;
+
+        public DestroyVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, AudioPlayer audioPlayer) : base(eventBus)
         {
             _visualPipeline = visualPipeline;
+            _audioPlayer = audioPlayer;
         }
 
         protected override void HandleEvent(DestroyEvent evt)
         {
-            _visualPipeline.AddTask(new DestroyVisualTask(evt.Entity));
+            _visualPipeline.AddTask(new DestroyVisualTask(evt.Entity, _audioPlayer));
         }
     }
 }

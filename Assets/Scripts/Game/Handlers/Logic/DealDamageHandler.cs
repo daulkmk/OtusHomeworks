@@ -13,16 +13,16 @@ namespace Lessons.Game.Handlers.Logic
 
         protected override void HandleEvent(DealDamageEvent evt)
         {
-            if (!evt.Entity.TryGet(out HitPointsComponent hitPointsComponent))
+            if (evt.Entity.TryGet(out DamageHandlerComponent damageHandler))
             {
-                return;
-            }
+                foreach (var damageEffect in damageHandler.DamageHandler.Effects)
+                {
+                    damageEffect.Source = null;
+                    damageEffect.Target = evt.Entity;
+                    damageEffect.Damage = evt.Damage;
 
-            hitPointsComponent.Value -= evt.Damage;
-
-            if (hitPointsComponent.Value <= 0)
-            {
-                EventBus.RaiseEvent(new DestroyEvent(evt.Entity));
+                    EventBus.RaiseEvent(damageEffect);
+                }
             }
         }
     }

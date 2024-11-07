@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38709489}
-  - component: {fileID: 38709488}
+  - component: {fileID: 38709490}
   m_Layer: 0
   m_Name: Scope
   m_TagString: Untagged
@@ -140,22 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &38709488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38709487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc2e3226eb1740eba2ebc99ceae001c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects: []
 --- !u!4 &38709489
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +155,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &38709490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38709487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf4d4cb082648d8883a123916d4a0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 719186148}
+  - {fileID: 1696705875}
+  - {fileID: 1888635784}
+  - {fileID: 1319412658}
+  - {fileID: 1234559479}
+  - {fileID: 574701785}
+  - {fileID: 447254726}
+  - {fileID: 181200982}
 --- !u!1001 &57628784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -284,6 +292,106 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789385
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[1]
+      value: 807573755842789400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[2]
+      value: 807573755842789395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b6800c1defee546798aeed2f7a581be7, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4dc3f4ce2f8594160a8aee0a7fdc5a07, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d1d73939dcbe4e8890062bb45c775c5, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e06a2876563e4176b0f2903d2c1b1d1, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 72ec728a021244cd9b54a2fb92ef45f3, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789384]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789385]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789400]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.VampDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789384].<ExtraDamage>k__BackingField
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789385].<ExtraDamage>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &57628785 stripped
@@ -298,7 +406,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 57628784}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1319412658}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
@@ -417,6 +525,86 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[2]
+      value: 807573867185045506
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7d8f63236f074456dac94230db57fac4, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ebd6580ff27d4dc1a08513f4d2330d3, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 58a60bdc5e2d64a81a2b9d53513b684b, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ba3f36a6a4424d0ab20e02a25c18d1d, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789392]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573867185045506]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.SkipTutnEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789392].<ExtraDamage>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &165874628 stripped
@@ -431,12 +619,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 165874627}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 574701785}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &181200982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827189790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &185250766
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +822,181 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: shield.AttacksToBlock.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789391
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f39f9cf73887b47b79d98618433ecc22, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: damageHandler.Effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: def0bb40c1b6e487793c7e472e79964d, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a07129f97165b416ca5b98bf007d13ab, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 37149f279272d4103a4bd4026c305fb9, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 201df6a048cb448ccac478b26b990d93, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: d6bc3dfb7a20a49e6a8e0eda07246f8a, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 11a383f73734c485b849b8833ccd79c6, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 24ea30ee053054a85b364e3e8d898895, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5939d99aa7ba34992be48ead7acab59f, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 39a6ae64024a24d8b99fad8bc05e747e, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a6f985f0b2cf4e3a9c76417ac4559d6, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: damageHandler.Effects.Array.data[0]
+      value: 807573755842789401
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: damageHandler.Effects.Array.data[1]
+      value: 807573755842789401
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789386]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789387]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789388]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789389]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789390]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789391]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789401]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.ApplyDamageWithShieldEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789386].<ExtraDamage>k__BackingField
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789387].<ExtraDamage>k__BackingField
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789388].<ExtraDamage>k__BackingField
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789389].<ExtraDamage>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789390].<ExtraDamage>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789391].<ExtraDamage>k__BackingField
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &202141557 stripped
@@ -642,7 +1011,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 202141556}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1234559479}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
@@ -662,6 +1031,7 @@ GameObject:
   - component: {fileID: 389887960}
   - component: {fileID: 389887961}
   - component: {fileID: 389887962}
+  - component: {fileID: 389887963}
   m_Layer: 5
   m_Name: Player (Red)
   m_TagString: Untagged
@@ -795,6 +1165,29 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!114 &389887963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389887956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 27703
+--- !u!1 &447254726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 459021462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &459021462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,6 +1301,126 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[2]
+      value: 807573867185045505
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 33ff38fb452f04c6dbcbbf203bcd8f8a, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fcaff7f46290d4657b035525168557a1, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe032ac64c73c436d82ad960d3aba327, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ce128ffcd4db84b3089372afa554b761, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbeb766cb42ef4f26b456f01bf0380ba, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: c3bc0693b2b82454587ab200c3b922b0, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3b7030c6f2704921bd6c3a92ae9b560, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 64a83b34af3b741c39341e7d4c00cffa, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f83a9e4ed40d64d6690cdc9b3c9415ff, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789393]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573867185045504]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.HealRandomAllyEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573867185045505]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.HealRandomAllyEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573867185045505].<HealValue>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789393].<ExtraDamage>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &459021463 stripped
@@ -922,10 +1435,22 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 459021462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 447254726}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &459021465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447254726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &495628816
@@ -1078,6 +1603,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &574701785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 165874627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &574701786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574701785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &604338283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1705,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &719186148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 383512544509087720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &743752121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,6 +1725,7 @@ GameObject:
   - component: {fileID: 743752123}
   - component: {fileID: 743752126}
   - component: {fileID: 743752127}
+  - component: {fileID: 743752128}
   m_Layer: 5
   m_Name: Player (Blue)
   m_TagString: Untagged
@@ -1309,6 +1859,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &743752128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 743752121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 27703
 --- !u!224 &1141858329 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 383512545514860529, guid: 291ab9f483432480c8815884e98cd0a0,
@@ -1321,10 +1888,58 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 383512544509087720}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 719186148}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1141858331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719186148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1234559479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 202141556}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1234559480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234559479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1319412658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 57628784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1319412659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319412658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1370046839
@@ -1440,6 +2055,101 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: targetSelector.Effect
+      value: 807573815199268910
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e2d09ca938c1487383581b917a8b48c, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ca4ea813b9fe44879a16c7ffbb75d634, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ecba59054dcda4ece97352987857289b, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6db98fae60c78455f81beb82f267d315, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: bd0d4bf408ccf47e7a54455c78347fa7, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 035fcad0317044a269025095209ae8b5, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 82972a344ac784add9948bec53586af9, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 925f229f6aa9e4a9d932b1df21c7c1e0, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573815199268909]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.SelectRandomTargetWitchChanceEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573815199268910]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.SelectRandomTargetWitchChanceEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573815199268909].<Chance>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573815199268910].<Chance>k__BackingField
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &1370046840 stripped
@@ -1454,12 +2164,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1370046839}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1888635784}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1696705875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1991190821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1827189790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1583,6 +2299,141 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789394
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 31a832b5ffe004b669c0b887d8e2b984, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: damageHandler.Effects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5bb9ff9087b6d492eacdeda34a7610f4, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9aec69027fb0d42d284ccb7c087858c0, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1314fcb530f1f444489b0b5a3caed0a1, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 24cda1d363f66421b9a28d0ce15c2d2a, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c42d7f78fc4c492c851c0f6d5ec764f, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8705eee9f468f4612995a31ade57aa3c, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: cf4131bc52c7c42d68eefca84e52e73a, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 855f23e1af9964e14a4956788f3097a8, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 22eae6007a5b540ddb343c25c1c84dae, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e23698572f7448d1bad5e6f926790c0, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5394c6470fa594d1a96b89972712026e, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 02f04a1cc50a2457799df1aadd4d69c2, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: damageHandler.Effects.Array.data[1]
+      value: 807573755842789402
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789394]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789402]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.ApplyDamageToAllOtherHeroesEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573815199268906]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.ApplyDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789394].<ExtraDamage>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &1827189791 stripped
@@ -1597,10 +2448,22 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1827189790}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 181200982}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1827189793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181200982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1854234142
@@ -1720,6 +2583,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bluePlayer: {fileID: 743752126}
   redPlayer: {fileID: 389887961}
+--- !u!1 &1888635784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1370046839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1888635785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888635784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1888635786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888635784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601d4b8e8c6bf4358b7f4913e7f29c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initOnAwake: 1
+  position:
+    transform: {fileID: 0}
+  stats:
+    strength:
+      value: 1
+  life:
+    isDead:
+      value: 0
+    hitPoints:
+      value: 1
+    maxHitPoints:
+      value: 1
+  weapon:
+    Effects: []
+  shield:
+    AttacksToBlock:
+      value: 0
+  damageHandler:
+    Effects:
+    - rid: 807573815199268866
+  targetSelector:
+    Effect:
+      rid: 807573815199268867
+  sfx:
+    StartTurnSounds: []
+    LowHealthSounds: []
+    UseAbilitySounds: []
+    DeathSounds: []
+  view:
+    value: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 807573815199268866
+      type: {class: ApplyDamageEffectEvent, ns: Lessons.Game.Events.Effects, asm: Assembly-CSharp}
+    - rid: 807573815199268867
+      type: {class: SelectDefaultTargetEffectEvent, ns: Lessons.Game.Events.Effects,
+        asm: Assembly-CSharp}
 --- !u!1 &1917274683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +2809,86 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789382
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ce6128bf170245efb97b330945a50b8, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c545d682ce264fc4a52dbc10b8c6de6, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b65f0a22d77274a0c991c9ce95d35b64, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: b21a2acc523ba49979498d782ce51021, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 948c84e2313e5445a9443f16d7ac6ed8, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 520822e61b1144d7588d5eb6a675e23b, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789382]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789382].<ExtraDamage>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}
 --- !u!224 &1991190822 stripped
@@ -1891,10 +2903,22 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1991190821}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1696705875}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 648961bfe2c7468cb08474073dafb4fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1991190824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696705875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b3e596fe1af4ebba9efdc63825290e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &383512544509087720
@@ -1912,7 +2936,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 84bcba0cb789e481e8babd439c92edec,
+      objectReference: {fileID: 21300000, guid: 758049b70da174878bc8ec6c1a5d4820,
         type: 3}
     - target: {fileID: 383512545514860528, guid: 291ab9f483432480c8815884e98cd0a0,
         type: 3}
@@ -2023,6 +3047,131 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.hitPoints.value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: stats.strength.value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: life.maxHitPoints.value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[0]
+      value: 807573755842789380
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: weapon.Effects.Array.data[2]
+      value: 807573755842789381
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.DeathSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: a2de2f87ac95a498f9859a5608963e0b, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.LowHealthSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c005d6e1b29e6408b931bb0c26dcfb1a, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b0eeec7c3abd42e484ac99b5b8ed794, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fbf48d1898f2248fd9922ba1429d4b42, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: e4c3823ffca3f474ea4db4c4e741c794, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 886bbc95762ec4b4e8e8a53bd6520b7e, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.StartTurnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4c9ee245a544f44f2a0ab1c792044c67, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: sfx.UseAbilitySounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c3cb88de66244ea58fdef2aeac8a979, type: 3}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789379]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageToRandomEnemyEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789380]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789381]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageToRandomEnemyEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789396]
+      value: Assembly-CSharp Lessons.Game.Events.Effects.DealDamageBackwardsEffectEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789379].<Damage>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789381].<Damage>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797204688028773731, guid: 291ab9f483432480c8815884e98cd0a0,
+        type: 3}
+      propertyPath: managedReferences[807573755842789380].<ExtraDamage>k__BackingField
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291ab9f483432480c8815884e98cd0a0, type: 3}

@@ -342,9 +342,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initOnAwake: 1
   position:
-    transform: {fileID: 0}
-    coordinates:
-      value: {x: 0, y: 0}
+    transform: {fileID: 383512545514860529}
+  stats:
+    strength:
+      value: 1
   life:
     isDead:
       value: 0
@@ -352,7 +353,22 @@ MonoBehaviour:
       value: 1
     maxHitPoints:
       value: 1
-  view: {fileID: 8763992113062683896}
+  weapon:
+    Effects:
+    - rid: 807573755842789378
+    - rid: 807573755842789395
+  view:
+    value: {fileID: 8763992113062683896}
+  references:
+    version: 2
+    RefIds:
+    - rid: 807573755842789378
+      type: {class: DealDamageEffectEvent, ns: Lessons.Game.Events.Effects, asm: Assembly-CSharp}
+      data:
+        <ExtraDamage>k__BackingField: 1
+    - rid: 807573755842789395
+      type: {class: DealDamageBackwardsEffectEvent, ns: Lessons.Game.Events.Effects,
+        asm: Assembly-CSharp}
 --- !u!114 &8763992113062683896
 MonoBehaviour:
   m_ObjectHideFlags: 0

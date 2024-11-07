@@ -1,47 +1,55 @@
-﻿using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Entities;
+using Lessons.Entities.Common.Components;
 using Lessons.Game.Events;
 using Lessons.Game.Services;
-using UnityEngine;
+using Lessons.Level;
 using VContainer;
 
 namespace Lessons.Game.Turn.Logic.Tasks
 {
     public sealed class PlayerTurnTask : Task
     {
-        private readonly KeyboardInput _input;
         private readonly EventBus _eventBus;
-        private readonly IEntity _player;
+        private readonly PlayersService _playerService;
 
         private UniTaskCompletionSource _tcs;
         
         [Inject]
-        public PlayerTurnTask(KeyboardInput input, EventBus eventBus, PlayerService playerService)
+        public PlayerTurnTask(EventBus eventBus, PlayersService playerService, HeroesViewMap map)
         {
-            _input = input;
             _eventBus = eventBus;
-            _player = playerService.Player;
+            _playerService = playerService;
         }
-        
+
         protected override UniTask OnRun()
         {
+            if (_playerService.PlayerHero.TryGet(out SkipTurnComponent skipTurn))
+            {
+                _playerService.PlayerHero.Remove(skipTurn);
+
+                UnityEngine.Debug.Log("SKIP TURN");
+                return UniTask.CompletedTask;
+            }
+
             _tcs = new();
-            _input.OnMove += OnMovePreformed;
+            _playerService.OnEnemyClicked += OnEnemyHeroClicked;
+
+            _eventBus.RaiseEvent(new TurnStartedEvent());
 
             return _tcs.Task;
         }
 
-        protected override UniTask OnFinish()
+        private void OnEnemyHeroClicked(IEntity enemy)
         {
-            _input.OnMove -= OnMovePreformed;
-            return UniTask.CompletedTask;
+            _eventBus.RaiseEvent(new PlayerSelectedAttackTargetEvent(_playerService.PlayerHero, enemy));
+            _tcs.TrySetResult();
         }
 
-        private void OnMovePreformed(Vector2Int direction)
+        protected override UniTask OnFinish()
         {
-            _eventBus.RaiseEvent(new ApplyDirectionEvent(_player, direction));
-            _tcs.TrySetResult();
+            _playerService.OnEnemyClicked -= OnEnemyHeroClicked;
+            return UniTask.CompletedTask;
         }
     }
 }

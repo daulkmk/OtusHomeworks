@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using System.Collections;
+using Entities;
 using UnityEngine;
 
 namespace Lessons.Game.Events

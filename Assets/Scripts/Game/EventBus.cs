@@ -35,6 +35,9 @@ namespace Lessons.Game
             }
         }
 
+        private static int frame;
+        private static int raiseCount;
+
         public void RaiseEvent<T>(T evt) where T : IEvent
         {
             if (_isRunning)
@@ -44,13 +47,23 @@ namespace Lessons.Game
             }
             
             _isRunning = true;
+
+            if (frame != Time.frameCount)
+            {
+                frame = Time.frameCount;
+                raiseCount = 1;
+            }
+            if (++raiseCount >= 500)
+            {
+                throw new Exception("SUPUPODSUFPUDF");
+            }
             
             Type eventType = evt.GetType();
             Debug.Log(eventType);
 
             if (!_handlers.TryGetValue(eventType, out var handlers))
             {
-                Debug.Log($"No subscribers found in: {eventType}");
+                Debug.Log($"<color=red>No subscribers found in: {eventType}</color>");
                 return;
             }
 

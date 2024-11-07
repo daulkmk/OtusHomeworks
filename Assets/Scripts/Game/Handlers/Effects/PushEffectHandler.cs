@@ -1,41 +1,26 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Lessons.Entities.Common.Components;
 using Lessons.Game.Events;
 using Lessons.Game.Events.Effects;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Lessons.Game.Handlers.Effects
 {
     [UsedImplicitly]
-    public sealed class PushEffectHandler : IInitializable, IDisposable
+    public sealed class PushEffectHandler : BaseHandler<PushEffectEvent>
     {
-        private readonly EventBus _eventBus;
-
-        public PushEffectHandler(EventBus eventBus)
+        public PushEffectHandler(EventBus eventBus) : base(eventBus)
         {
-            _eventBus = eventBus;
         }
 
-        void IInitializable.Initialize()
-        {
-            _eventBus.Subscribe<PushEffectEvent>(OnPush);
-        }
-
-        void IDisposable.Dispose()
-        {
-            _eventBus.Unsubscribe<PushEffectEvent>(OnPush);
-        }
-
-        private void OnPush(PushEffectEvent evt)
+        protected override void HandleEvent(PushEffectEvent evt)
         {
             CoordinatesComponent coordinates = evt.Source.Get<CoordinatesComponent>();
             CoordinatesComponent targetCoordinates = evt.Target.Get<CoordinatesComponent>();
 
             Vector2Int direction = targetCoordinates.Value - coordinates.Value;
-            
-            _eventBus.RaiseEvent(new ForceDirectionEvent(evt.Target, direction));
+
+            EventBus.RaiseEvent(new ForceDirectionEvent(evt.Target, direction));
         }
     }
 }

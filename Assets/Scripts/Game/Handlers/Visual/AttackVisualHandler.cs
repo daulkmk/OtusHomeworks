@@ -1,28 +1,27 @@
-﻿using Lessons.Entities.Common.Components;
-using Lessons.Game.Events;
+﻿using Lessons.Game.Events;
 using Lessons.Game.Turn.Visual;
 using Lessons.Game.Turn.Visual.Tasks;
-using UnityEngine;
+using Lessons.Level;
 
 namespace Lessons.Game.Handlers.Visual
 {
     public sealed class AttackVisualHandler : BaseHandler<AttackEvent>
     {
         private readonly VisualPipeline _visualPipeline;
-        
-        public AttackVisualHandler(EventBus eventBus, VisualPipeline visualPipeline) : base(eventBus)
+        private readonly HeroesViewMap _heroesViewMap;
+
+        public AttackVisualHandler(EventBus eventBus, VisualPipeline visualPipeline, HeroesViewMap heroesViewMap) : base(eventBus)
         {
             _visualPipeline = visualPipeline;
+            _heroesViewMap = heroesViewMap;
         }
 
         protected override void HandleEvent(AttackEvent evt)
         {
-            Vector3 selfPos = evt.Entity.Get<TransformComponent>().Value.position;
-            Vector3 targetPos = evt.Target.Get<TransformComponent>().Value.position;
-
-            Vector3 attackDestination = selfPos + (targetPos - selfPos) * 0.5f;
+            var attacker = _heroesViewMap.GetViewByHero(evt.Entity);
+            var target = _heroesViewMap.GetViewByHero(evt.Target);
             
-            _visualPipeline.AddTask(new AttackVisualTask(evt.Entity, attackDestination));
+            _visualPipeline.AddTask(new AttackVisualTask(attacker, target));
         }
     }
 }

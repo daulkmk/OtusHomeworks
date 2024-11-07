@@ -1,6 +1,5 @@
 ﻿using System;
 using Entities;
-using UnityEngine;
 
 namespace Lessons.Game.Events.Effects
 {
@@ -9,8 +8,5 @@ namespace Lessons.Game.Events.Effects
     {
         public IEntity Source { get; set; }
         public IEntity Target { get; set; }
-        
-        [field:SerializeField]
-        public int ExtraDamage { get; private set; }
     }
 }

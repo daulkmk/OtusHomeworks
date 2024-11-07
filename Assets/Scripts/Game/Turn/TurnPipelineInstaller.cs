@@ -21,10 +21,10 @@ namespace Lessons.Game.Turn
 
         void IInitializable.Initialize()
         {
-            _turnPipeline.AddTask(new StartTurnTask());
+            _turnPipeline.AddTask(_objectResolver.CreateInstance<StartTurnTask>());
             _turnPipeline.AddTask(_objectResolver.CreateInstance<PlayerTurnTask>());
             _turnPipeline.AddTask(_objectResolver.CreateInstance<StartVisualPipelineTask>());
-            _turnPipeline.AddTask(new FinishTurnTask());
+            _turnPipeline.AddTask(_objectResolver.CreateInstance<FinishTurnTask>());
         }
 
         void IDisposable.Dispose()

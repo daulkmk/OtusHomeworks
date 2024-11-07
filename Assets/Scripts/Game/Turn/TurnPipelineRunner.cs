@@ -28,6 +28,8 @@ namespace Lessons.Game.Turn
 
         private async UniTask Run()
         {
+            await UniTask.NextFrame();
+
             while (!_cts.IsCancellationRequested)
             {
                 await _turnPipeline.Run().AttachExternalCancellation(_cts.Token);

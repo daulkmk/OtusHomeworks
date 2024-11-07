@@ -8,18 +8,31 @@ namespace Lessons.Game.Turn.Visual.Tasks
 {
     public sealed class DestroyVisualTask : Task
     {
-        private readonly TransformComponent _transform;
+        private readonly AudioPlayer _audioPlayer;
+        private readonly IEntity _entity;
         private readonly float _duration;
 
-        public DestroyVisualTask(IEntity entity, float duration = 0.15f)
+        public DestroyVisualTask(IEntity entity, AudioPlayer audioPlayer, float duration = 0.15f)
         {
-            _transform = entity.Get<TransformComponent>();
+           _entity = entity;
+            _audioPlayer = audioPlayer;
             _duration = duration;
         }
-        
-        protected override UniTask OnRun()
+
+        protected override async UniTask OnRun()
         {
-            return _transform.Value.DOScale(Vector3.zero, _duration).ToUniTask();
+            if (_entity.TryGet(out SFXComponent sfx) && sfx.TryGetDeathSound(out var clip))
+            {
+                _audioPlayer.PlaySound(clip);
+                await UniTask.WaitForSeconds(clip.length);
+            }
+
+            var transform = _entity.Get<TransformComponent>();
+
+            await DOTween.Sequence()
+                .Append(transform.Value.DOScale(Vector3.zero, _duration))
+                .AppendCallback(() => transform.Value.gameObject.SetActive(false))
+                .ToUniTask();
         }
     }
 }

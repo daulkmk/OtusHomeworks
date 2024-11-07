@@ -1,41 +1,24 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Lessons.Entities.Common.Components;
 using Lessons.Game.Events;
 using Lessons.Game.Events.Effects;
-using VContainer.Unity;
 
 namespace Lessons.Game.Handlers.Effects
 {
     [UsedImplicitly]
-    public sealed class DealDamageEffectHandler : IInitializable, IDisposable
+    public sealed class DealDamageEffectHandler : BaseHandler<DealDamageEffectEvent>
     {
-        private readonly EventBus _eventBus;
-
-        public DealDamageEffectHandler(EventBus eventBus)
+        public DealDamageEffectHandler(EventBus eventBus) : base(eventBus)
         {
-            _eventBus = eventBus;
         }
 
-        void IInitializable.Initialize()
+        protected override void HandleEvent(DealDamageEffectEvent evt)
         {
-            _eventBus.Subscribe<DealDamageEffectEvent>(OnDealDamage);
-        }
-
-        void IDisposable.Dispose()
-        {
-            _eventBus.Unsubscribe<DealDamageEffectEvent>(OnDealDamage);
-        }
-
-        private void OnDealDamage(DealDamageEffectEvent evt)
-        {
-            int damage = evt.ExtraDamage;
             if (evt.Source.TryGet(out StatsComponent statsComponent))
             {
-                damage += statsComponent.Strength;
+                int damage = statsComponent.Strength;
+                EventBus.RaiseEvent(new DealDamageEvent(evt.Target, damage));
             }
-            
-            _eventBus.RaiseEvent(new DealDamageEvent(evt.Target, damage));
         }
     }
 }

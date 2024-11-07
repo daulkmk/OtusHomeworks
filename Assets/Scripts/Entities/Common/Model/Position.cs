@@ -8,7 +8,5 @@ namespace Lessons.Entities.Common.Model
     public sealed class Position
     {
         public Transform transform;
-        
-        public AtomicVariable<Vector2Int> coordinates;   
     }
 }
