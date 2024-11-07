@@ -1,5 +1,4 @@
-﻿using Lessons.Entities;
-using Lessons.Game;
+﻿using Lessons.Game;
 using Lessons.Game.Handlers.Effects;
 using Lessons.Game.Handlers.Logic;
 using Lessons.Game.Handlers.Visual;
@@ -22,23 +21,17 @@ namespace Lessons.Utils
             ConfigureHandlers(builder);
             ConfigureTurn(builder);
 
-            //builder.RegisterComponentInHierarchy<EntityInstaller>();
             builder.RegisterComponentInHierarchy<UIService>();
             builder.RegisterComponentInHierarchy<AudioPlayer>();
         }
 
         private void ConfigureLevel(IContainerBuilder builder)
         {
-            // builder.RegisterComponentInHierarchy<TileMap>();
-            // builder.Register<EntityMap>(Lifetime.Singleton);
-            // builder.Register<LevelMap>(Lifetime.Singleton);
-
             builder.Register<HeroesViewMap>(Lifetime.Singleton);
         }
 
         private void ConfigurePlayer(IContainerBuilder builder)
         {
-            //builder.RegisterComponentInHierarchy<KeyboardInput>();
             builder.Register<PlayersService>(Lifetime.Singleton);
         }
 
@@ -50,8 +43,6 @@ namespace Lessons.Utils
             builder.RegisterEntryPoint<TurnStartedHandler>();
             builder.RegisterEntryPoint<PlayerSelectedAttackTargetEventHandler>();
 
-            // builder.RegisterEntryPoint<ApplyDirectionHandler>();
-            // builder.RegisterEntryPoint<CollideHandler>();
 
             builder.RegisterEntryPoint<AttackHandler>();
             builder.RegisterEntryPoint<DealDamageHandler>();
@@ -59,8 +50,6 @@ namespace Lessons.Utils
             builder.RegisterEntryPoint<UseShieldHandler>();
             builder.RegisterEntryPoint<DestroyHandler>();
             
-            // builder.RegisterEntryPoint<MoveHandler>();
-            // builder.RegisterEntryPoint<ForceDirectionHandler>();
             
             builder.RegisterEntryPoint<SelectDefaultTargetEffectHandler>();
             builder.RegisterEntryPoint<SelectRandomTargetWitchChanceEffectHandler>();
@@ -77,7 +66,6 @@ namespace Lessons.Utils
             builder.RegisterEntryPoint<HealRandomAllyEffectHandler>();
             builder.RegisterEntryPoint<SkipTutnEffectHandler>();
             builder.RegisterEntryPoint<AbilityUsedEffectHandler>();
-            // builder.RegisterEntryPoint<PushEffectHandler>();
         }
         
         private void ConfigureTurn(IContainerBuilder builder)
@@ -87,7 +75,6 @@ namespace Lessons.Utils
             builder.RegisterEntryPoint<TurnPipelineRunner>();
 
             builder.Register<VisualPipeline>(Lifetime.Singleton);
-            // builder.RegisterEntryPoint<MoveVisualHandler>();
             builder.RegisterEntryPoint<DestroyVisualHandler>();
             builder.RegisterEntryPoint<HealVisualHandler>();
             builder.RegisterEntryPoint<AttackVisualHandler>();
