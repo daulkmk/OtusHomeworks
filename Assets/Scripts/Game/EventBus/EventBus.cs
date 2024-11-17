@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Lessons.Game
 {
-    public sealed class EventBus
+    public sealed partial class EventBus
     {
         private readonly Dictionary<Type, IEventHandlerCollection> _handlers = new();
 
@@ -35,9 +35,6 @@ namespace Lessons.Game
             }
         }
 
-        private static int frame;
-        private static int raiseCount;
-
         public void RaiseEvent<T>(T evt) where T : IEvent
         {
             if (_isRunning)
@@ -47,16 +44,6 @@ namespace Lessons.Game
             }
             
             _isRunning = true;
-
-            if (frame != Time.frameCount)
-            {
-                frame = Time.frameCount;
-                raiseCount = 1;
-            }
-            if (++raiseCount >= 500)
-            {
-                throw new Exception("SUPUPODSUFPUDF");
-            }
             
             Type eventType = evt.GetType();
             Debug.Log(eventType);
@@ -84,45 +71,6 @@ namespace Lessons.Game
             public void Unsubscribe(Delegate handler);
             
             public void RaiseEvent<T>(T evt);
-        }
-
-        private sealed class EventHandlerCollection<T> : IEventHandlerCollection
-        {
-            private readonly List<Delegate> _handlers = new();
-
-            private int _currentIndex = -1;
-
-            public void Subscribe(Delegate handler)
-            {
-                _handlers.Add(handler);
-            }
-
-            public void Unsubscribe(Delegate handler)
-            {
-                int index = _handlers.IndexOf(handler);
-                _handlers.RemoveAt(index);
-
-                if (index <= _currentIndex)
-                {
-                    _currentIndex--;
-                }
-            }
-
-            public void RaiseEvent<TEvent>(TEvent evt)
-            {
-                if (evt is not T concreteEvent)
-                {
-                    return;
-                }
-                
-                for (_currentIndex = 0; _currentIndex < _handlers.Count; _currentIndex++)
-                {
-                    Action<T> handler = (Action<T>)_handlers[_currentIndex];
-                    handler.Invoke(concreteEvent);
-                }
-
-                _currentIndex = -1;
-            }
         }
     }
 }
