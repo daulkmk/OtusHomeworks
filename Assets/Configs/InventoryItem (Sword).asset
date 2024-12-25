@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22487d842414666b12f9ae5a7f89099, type: 3}
+  m_Name: InventoryItem (Sword)
+  m_EditorClassIdentifier: 
+  item:
+    name: sword
+    flags: 12
+    metadata:
+      title: Simple Sword
+      description: +5 DAMAGE
+      icon: {fileID: 21300000, guid: 7ba8d06b2948c45049d8da0d4c4067a4, type: 3}
+    components:
+    - rid: 8281704652075171842
+    - rid: 8281704652075171840
+  references:
+    version: 2
+    RefIds:
+    - rid: 8281704652075171840
+      type: {class: Component_EquipType, ns: Game.GameEngine.Mechanics, asm: Assembly-CSharp}
+      data:
+        type: 2
+    - rid: 8281704652075171842
+      type: {class: Component_Effect, ns: Game.GameEngine.Mechanics, asm: Assembly-CSharp}
+      data:
+        effect:
+          rid: 8281704652075171843
+    - rid: 8281704652075171843
+      type: {class: Effect, ns: Game.GameEngine.Mechanics, asm: Assembly-CSharp}
+      data:
+        parameters:
+        - rid: 8281704652075171856
+    - rid: 8281704652075171856
+      type: {class: IntEffectParameter, ns: Game.GameEngine.Mechanics, asm: Assembly-CSharp}
+      data:
+        name: 1
+        value: 5
