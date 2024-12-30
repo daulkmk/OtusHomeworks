@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
+/// <summary>
+/// Player presenter+view - STUB!
+/// </summary>
 public class PlayerPresenter : MonoBehaviour
 {
     [SerializeField] private Text _speed;

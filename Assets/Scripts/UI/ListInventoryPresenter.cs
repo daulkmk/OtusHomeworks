@@ -4,35 +4,41 @@ using Lessons.MetaGame.Inventory;
 using UnityEngine;
 using VContainer;
 
+/// <summary>
+/// Presents inventory on screen
+/// </summary>
 public class ListInventoryPresenter : MonoBehaviour, IInventoryObserver
 {
-    [SerializeField] private InventoryItemPresenter _itemPresenterPrefab;
+    [SerializeField] private InventoryItemView _itemViewPrefab;
     [SerializeField] private Transform _presentersContainer;
 
-    private readonly Dictionary<InventoryItem, InventoryItemPresenter> _presenterByItem = new();
-    private ListInventory _listInventory;
+    private readonly Dictionary<InventoryItem, InventoryItemView> _presenterByItem = new();
+    private IInventory _inventory;
 
     public event Action<InventoryItem> OnItemClicked;
 
     [Inject]    
-    public void Construct(ListInventory inventory)
+    public void Construct(IInventory inventory)
     {
-        _listInventory = inventory;
-        _listInventory.AddObserver(this);
+        _inventory = inventory;
+        _inventory.AddObserver(this);
 
         foreach (var item in inventory.GetItems())
         {
-            OnItemAdded(item);
+            ShowItem(item);
         }
     }
 
-    public void OnItemAdded(InventoryItem item)
+    void IInventoryObserver.OnItemAdded(InventoryItem item) => ShowItem(item);
+    void IInventoryObserver.OnItemRemoved(InventoryItem item) => HideItem(item);
+
+    private void ShowItem(InventoryItem item)
     {
         var presenter = CreatePresenter(item);
         _presenterByItem.Add(item, presenter);
     }
 
-    public void OnItemRemoved(InventoryItem item)
+    private void HideItem(InventoryItem item)
     {
         var presenter = _presenterByItem[item];
         _presenterByItem.Remove(item);
@@ -40,9 +46,9 @@ public class ListInventoryPresenter : MonoBehaviour, IInventoryObserver
         Destroy(presenter.gameObject);
     }
 
-    private InventoryItemPresenter CreatePresenter(InventoryItem item)
+    private InventoryItemView CreatePresenter(InventoryItem item)
     {
-        var presenter = Instantiate(_itemPresenterPrefab, _presentersContainer);
+        var presenter = Instantiate(_itemViewPrefab, _presentersContainer);
 
         presenter.OnClick += () => OnItemClick(presenter);
         presenter.SetItem(item);
@@ -50,13 +56,13 @@ public class ListInventoryPresenter : MonoBehaviour, IInventoryObserver
         return presenter;
     }
 
-    private void OnItemClick(InventoryItemPresenter presenter)
+    private void OnItemClick(InventoryItemView presenter)
     {
         OnItemClicked?.Invoke(presenter.InventoryItem);
     }
 
     private void OnDestroy()
     {
-        _listInventory?.RemoveObserver(this);
+        _inventory?.RemoveObserver(this);
     }
 }

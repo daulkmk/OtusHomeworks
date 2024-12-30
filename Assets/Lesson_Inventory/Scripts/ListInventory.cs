@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 
+
 namespace Lessons.MetaGame.Inventory
 {
-    public sealed class ListInventory
+    public sealed class ListInventory : IInventory
     {
         [ShowInInspector, ReadOnly]
         private List<InventoryItem> items;

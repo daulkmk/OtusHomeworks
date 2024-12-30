@@ -3,7 +3,7 @@ using Lessons.MetaGame.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryItemPresenter : MonoBehaviour
+public class InventoryItemView : MonoBehaviour
 {
     [SerializeField] private Image _icon;
     [SerializeField] private Text _title;
