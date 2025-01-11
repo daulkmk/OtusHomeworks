@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -35,6 +36,10 @@ namespace Lessons.MetaGame.Inventory
             if (this.items.Remove(item))
             {
                 this.OnItemRemoved(item);
+            }
+            else
+            {
+                throw new ArgumentException("Cannot remove - item not found");
             }
         }
 
