@@ -1,0 +1,20 @@
+{
+    "name": "Game.Entities",
+    "rootNamespace": "",
+    "references": [
+        "Entities",
+        "VContainer",
+        "UniTask",
+        "ConverterFromOtherHomveWork",
+        "BehaviourTree"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
