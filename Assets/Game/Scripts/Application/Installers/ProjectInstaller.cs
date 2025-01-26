@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace SampleGame
@@ -9,11 +10,22 @@ namespace SampleGame
     )]
     public sealed class ProjectInstaller : ScriptableObjectInstaller
     {
+        [SerializeField] private AssetReference _gameSceneReference;
+
         public override void InstallBindings()
         {
-            this.Container.Bind<ApplicationExiter>().AsSingle().NonLazy();
-            this.Container.Bind<GameLoader>().AsSingle().NonLazy();
-            this.Container.Bind<MenuLoader>().AsSingle().NonLazy();
+            this.Container.Bind<ApplicationExiter>()
+                .AsSingle()
+                .NonLazy();
+            
+            this.Container.Bind<GameLoader>()
+                .AsSingle()
+                .WithArguments(_gameSceneReference)
+                .NonLazy();
+
+            this.Container.Bind<MenuLoader>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

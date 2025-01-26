@@ -1,19 +1,31 @@
-using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
 
 namespace SampleGame
 {
     public sealed class GameLoader
     {
-        //TODO: Сделать через Addressables
+        private readonly object _gameSceneKey;
+
+        private AsyncOperationHandle _sceneHandle;
+
+        public GameLoader(object gameSceneKey)
+        {
+            _gameSceneKey = gameSceneKey;
+        }
+
         public void UnloadGame()
         {
-            SceneManager.UnloadSceneAsync("Game");
+            Addressables.UnloadSceneAsync(_sceneHandle);
         }
         
-        //TODO: Сделать через Addressables
         public void LoadGame()
         {
-            SceneManager.LoadScene("Game");
+            if (_sceneHandle.IsValid())
+                return;
+
+            _sceneHandle = Addressables.LoadSceneAsync(_gameSceneKey);
         }
     }
 }
