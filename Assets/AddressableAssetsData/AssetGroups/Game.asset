@@ -18,9 +18,30 @@ MonoBehaviour:
   m_GUID: 4aaacd584f4b3419a8049cb122dbcc9a
   m_SerializeEntries:
   - m_GUID: be9bfa09430ff456eb76851b15fa7fd2
-    m_Address: Assets/Game/Scenes/Game.unity
+    m_Address: Game
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d83aff58adf84ed7bc1b147ee6bd11b
+    m_Address: Location2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a14cc9400142340c0a8d39ee49e37463
+    m_Address: Location3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0209de67f9a924022bfafde34ab42860
+    m_Address: InGameCanvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24f6c18c838b044b7b5cf4bdef1eb1bf
+    m_Address: Location4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 744154fb90c3b491eb20d09ad56c5863, type: 2}
   m_SchemaSet:

@@ -21,12 +21,17 @@ namespace SampleGame
         {
             this.gameLoader = gameLoader;
             this.applicationExiter = applicationFinisher;
+
+            if (isActiveAndEnabled)
+                OnEnable();
         }
 
         private void OnEnable()
         {
-            this.startButton.onClick.AddListener(this.gameLoader.LoadGame);
-            this.exitButton.onClick.AddListener(this.applicationExiter.ExitApp);
+            if (this.gameLoader != null)
+                this.startButton.onClick.AddListener(this.gameLoader.LoadGame);
+            if (this.applicationExiter != null)
+                this.exitButton.onClick.AddListener(this.applicationExiter.ExitApp);
         }
 
         private void OnDisable()

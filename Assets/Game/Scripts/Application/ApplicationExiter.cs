@@ -1,5 +1,3 @@
-using UnityEditor;
-
 namespace SampleGame
 {
     public sealed class ApplicationExiter
@@ -7,9 +5,9 @@ namespace SampleGame
         public void ExitApp()
         {
 #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit(0);
+            UnityEngine.Application.Quit(0);
 #endif
         }
     }

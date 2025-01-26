@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801d227e37ce4b769b0e7c827d5ac595, type: 3}
   m_Name: ProjectInstaller
   m_EditorClassIdentifier: 
+  _menuSceneReference:
+    m_AssetGUID: 2a971fcbfef4b451f82c4da85c65aee1
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _gameSceneReference:
     m_AssetGUID: be9bfa09430ff456eb76851b15fa7fd2
     m_SubObjectName: 
