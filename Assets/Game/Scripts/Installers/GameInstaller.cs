@@ -35,10 +35,10 @@ public class GameInstaller : MonoInstaller
             .WithArguments(_player.transform)
             .NonLazy();
 
-        Container.BindInterfacesTo<PlayerCharacterController>()
+        Container.BindInterfacesAndSelfTo<PlayerCharacterController>()
             .AsSingle();
 
-        Container.BindInterfacesTo<ZombiesSpawner>()
+        Container.BindInterfacesAndSelfTo<ZombiesSpawner>()
             .AsSingle()
             .WithArguments(_zombiePrefab, _worldContainer, _zombieSpawnPoints, _maxActiveZombies, _spawnZombiesInterval)
             .NonLazy();

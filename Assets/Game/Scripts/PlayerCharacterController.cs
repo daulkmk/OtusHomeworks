@@ -1,3 +1,4 @@
+using System;
 using Atomic.Elements;
 using Atomic.Objects;
 using Lessons.Lesson_AtomicIntroduction;
@@ -11,6 +12,9 @@ public class PlayerCharacterController : ITickable, IInitializable
     private GetInputTargetMechanics _getInputTargetMechanics;
     private GetPlayerInputDirectionMechanic _getKeyboardInputDirectionMechanic;
     private GetPlayerShootActionRequest _getPlayerShootActionRequest;
+
+    public event Action OnShootRequested;
+    public event Action<Vector3> OnMoveDirectionChanged;
 
     public PlayerCharacterController([Inject(Id = ObjectType.Player)] IAtomicEntity player)
     {
@@ -31,7 +35,10 @@ public class PlayerCharacterController : ITickable, IInitializable
         _getKeyboardInputDirectionMechanic = new GetPlayerInputDirectionMechanic();
         _getKeyboardInputDirectionMechanic.Direction.Subscribe(input =>
         {
-            moveDirection.Value = new Vector3(input.x, 0, input.y);
+            var direction = new Vector3(input.x, 0, input.y); ;
+
+            moveDirection.Value = direction;
+            OnMoveDirectionChanged?.Invoke(direction);
         });
     }
 
@@ -53,7 +60,11 @@ public class PlayerCharacterController : ITickable, IInitializable
         var shootRequest = _caracter.Get<IAtomicAction>(ShootAPI.ShootRequest);
 
         _getPlayerShootActionRequest = new GetPlayerShootActionRequest();
-        _getPlayerShootActionRequest.ShootRequested.Subscribe(shootRequest.Invoke);
+        _getPlayerShootActionRequest.ShootRequested.Subscribe(() =>
+        {
+            shootRequest.Invoke();
+            OnShootRequested?.Invoke();
+        });
     }
 
     void ITickable.Tick()

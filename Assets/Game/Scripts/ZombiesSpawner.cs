@@ -22,6 +22,10 @@ namespace Lessons.Lesson_Components
         private readonly CancellationTokenSource _cts = new();
         private readonly List<AtomicEntity> _zombies = new();
 
+        public bool SpawnEnabled { get; set; } = true;
+
+        public event Action<AtomicEntity> OnZombieDie;
+
         public ZombiesSpawner(AtomicEntity zombiePrefab
             , Transform container
             , IReadOnlyList<Transform> spawnPoints
@@ -51,13 +55,15 @@ namespace Lessons.Lesson_Components
 
         private async UniTask SpawnRoutine(CancellationToken ct)
         {
-            while (!_cts.IsCancellationRequested)
+            while (true)
             {
-                await UniTask.WaitUntil(() => _zombies.Count < _maxActive);
-                
+                await UniTask.WaitUntil(() => _zombies.Count < _maxActive && SpawnEnabled, cancellationToken: ct);
+
                 SpawnZombie();
 
                 await UniTask.WaitForSeconds(_spawnInterval, cancellationToken: ct);
+
+                ct.ThrowIfCancellationRequested();
             }
         }
 
@@ -82,6 +88,8 @@ namespace Lessons.Lesson_Components
 
         private async UniTask OnSomeZombieDie(AtomicEntity zombie)
         {
+            OnZombieDie?.Invoke(zombie);
+
             await UniTask.WaitForSeconds(_despawnDelaySec, cancellationToken: _cts.Token);
 
             _zombies.Remove(zombie);
